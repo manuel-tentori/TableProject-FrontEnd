@@ -1,0 +1,273 @@
+.over {
+    z-index: 999999 !important;
+    width: 100% !important;
+    height: 200;
+    background: rgba(0, 0, 0, 0.3);
+    position: fixed;
+    top: -240px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+  }
+
+  
+  .card-title {
+    margin-top: 20px;
+  margin-left: 25px;
+  }
+
+  .card1 {
+    width: 500px !important;
+    height: 300px !important;
+  }
+  
+  .cooplatModal {
+    top: 40%;
+    left: 32%;
+  }
+  
+  .col-md-4 {
+    padding-bottom: 7px;
+    margin-left: 10px;
+    float: left;
+    margin-right: 55px;
+  }
+
+  .col-md-12 {
+    margin-bottom: 140px;
+
+  }
+
+  
+  .buttonModal {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+    top: 150px;
+  }
+  
+  .overButton {
+    z-index: 999999 !important;
+    width: 50px;
+    background: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    bottom: 5%px;
+    left: 5%px;
+  }
+  
+  .card-header {
+    padding: 10px 20px 0px !important;
+  }
+  
+  
+  .btn {
+    margin-top: 80px;
+    margin-right: 255px;
+  }
+  
+  .div-table-content {
+    width: 100%;
+    display: flex;
+    left: 3%;
+    top: 90%;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: auto;
+  }
+  
+  .dropup-content {
+    margin-right: 3%;
+    margin-top: -150px;
+    margin-bottom: 90px;
+  }
+  
+  .div-table-column .div-table-row {
+    padding: 2px;
+    padding-right: 90px;
+  }
+  
+  .div-dinamic-column {
+    float: left;
+  }
+  
+  td,
+  th {
+    text-align: center;
+    word-wrap: normal;
+    white-space: nowrap;
+  }
+  
+  .table-data {
+    border-collapse: separate;
+    border-spacing: 30px 10px;
+    width: 60%;
+  }
+  
+  .table-data thead {
+    font-size: 15px;
+  }
+  
+  .table-data tbody {
+    font-size: 13px;
+  }
+  
+  .table-weeks {
+    border-collapse: separate;
+    border-spacing: 30px 10px;
+    display: block;
+  }
+  
+  .table-weeks thead {
+    font-size: 15px;
+  }
+  
+  .table-weeks tbody {
+    font-size: 13px;
+  }
+  
+  .table-weeks tbody tr {
+    border-spacing: 100em;
+  }
+  
+  .table-weeks thead th {
+    width: 100px;
+  }
+  
+  .progress-week {
+    width: 39.359px;
+    padding-left: 4px !important;
+  }
+  
+  .revenue-week {
+    padding-left: 12px !important;
+  }
+  
+  .weeks-content {
+    width: 650px;
+    overflow-x: scroll;
+    white-space: nowrap;
+    z-index: 2;
+  }
+  
+  .div-table-column-din {
+    width: 350px;
+    overflow-x: scroll;
+    white-space: nowrap;
+    scrollbar-width: thin;
+  }
+  
+  .div-dinamic-column-div {
+    flex: 0 0 auto;
+  }
+  
+  .tbody {
+    width: 240px;
+    padding-left: 10px;
+  }
+  
+  .container-weeks-table {
+    display: flex;
+  }
+  
+  .add-button {
+    text-align: right;
+  }
+  
+  .progress-week {
+    margin-right: 40px;
+  }
+  
+  .row-din-importi {
+    color: black;
+  }
+  
+  .container-dropup {
+    text-align: right;
+    height: 1px;
+  }
+  
+  .span-plus {
+    position: absolute;
+    left: 20px;
+    font-size: 2.2em;
+    top: 20px;
+    cursor: pointer;
+  }
+  
+  .card {
+    height: 100%;
+    width: 100%;
+  }
+  
+  .header-title {
+    font-size: 15px;
+    font-weight: bold;
+  }
+  
+  .buttonAddProject {
+    position: relative;
+    top: 10px;
+    left: 45px;
+  }
+  
+  .buttonAddWeek {
+    position: absolute;
+    top: 10px;
+    left: 88%;
+  
+  }
+  
+  .table-weeks div th {
+    font-size: 15px;
+  }
+  
+  .button {
+    position: relative;
+    bottom: 20px;
+    margin-left: 85%;
+    display: block;
+  }
+  
+  hr {
+    border-top: 2px solid black;
+  }
+  
+  .span-button {
+    position: relative;
+    left: -80px;
+    font-size: 2.2em;
+    top: -90px;
+    cursor: pointer;
+  }
+  
+  .button {
+    background-color: #66615b;
+    border: none;
+    color: white;
+    padding: 14px 28px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 10px;
+  }
+  
+  .button {
+    background-color: white;
+    color: black;
+    border: 2px solid #66615b;
+  }
+  
+  .button:hover {
+    background-color: #66615b;
+    color: white;
+  }
+  
+  .perc {
+    width: 70px;
+    text-align: center;
+  }

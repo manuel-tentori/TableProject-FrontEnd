@@ -1,0 +1,131 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-content">
+            <div class="toolbar">
+              <h4 class="card-title">PROGETTI</h4>
+            </div>
+            <div class="div-table-content">
+              <table id="example" class="table-data">
+                <thead>
+                  <tr>
+                    <th>Rif.</th>
+                    <th>Titolo</th>
+                    <th>Revenue</th>
+                    <th>Perc. Completamento</th>
+                    <th>Data inizio</th>
+                    <th>Data fine</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let d of datas; let i=index">
+                    <td>{{ d.ID }}</td>
+                    <td>{{ d.Title }}</td>
+                    <td>{{ d.Revenue }} €</td>
+                    <td>{{ ProgressPerc(d) }}%</td>
+                    <td>{{ d.DateStart | date }}</td>
+                    <td>{{ d.DateEnd | date }}</td>
+                    <hr />
+                  </tr>
+                </tbody>
+              </table>
+
+              <div class="weeks-content">
+                <div class="container-weeks-table" *ngFor="let d of datas; let k = index">
+                  <div id="example1" class="table-weeks" *ngFor="let w of d.Weeks; let i= index">
+                    <div *ngIf="k == 0">
+                      <tr>
+                        <th>Settimana {{ i + 1 }}</th>
+                        <th>{{ Sum(d) }}</th>
+                      </tr>
+                    </div>
+                    <div class="tbody">
+                      <tr>
+                        <td>
+                          <input type="number" value="{{ w.ProgressPerc }}" [(ngModel)]="w.ProgressPercWeek"
+                            class="perc" max=100 min=0 />
+                        </td>
+                        <td class="revenue-week">
+                          {{ PartialRevenue(d) }}
+                        </td>
+                        <hr/>
+                      </tr>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main-content over" *ngIf="flagAperta">
+  <div class="card cooplatModal">
+    <div class="card-header"></div>
+    <div class="card-content">
+      <div class="col-md-6">
+        <label>{{ supportoTipoClass }}</label>
+        <input type="text" [(ngModel)]="supportoInput" />
+      </div>
+      <div class="col-md-3">
+        <!-- <button class="btn btn-fill btn-default" id="testback" (click)="ChangeResp();Back()">Conferma</button> -->
+        <button (click)="save()" class="btn btn-fill btn-default">Salva</button>
+      </div>
+      <div class="col-md-3">
+        <button (click)="back()" class="btn btn-fill btn-default">
+          Chiudi
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="main-content over" *ngIf="flagApertaAddProject">
+  <div class="card card1 cooplatModal">
+    <div class="card-header"></div>
+    <div class="card-content">
+      <div class="col-md-4">
+        <label>Rif.</label>
+        <input type="text" [(ngModel)]="newData.ID" />
+      </div>
+      <div class="col-md-4">
+        <label>Titolo</label>
+        <input type="text" [(ngModel)]="newData.Title" />
+      </div>
+      <div class="col-md-4">
+        <label>Revenue</label>
+        <input type="number" [(ngModel)]="newData.Revenue" />
+      </div>
+      <div class="col-md-4">
+        <label>Data inizio</label>
+        <input type="date" id="DateStart" [(ngModel)]="newData.DateStart" />
+      </div>
+      <div class="col-md-4">
+        <label>Data fine</label>
+        <input type="date" id="DateEnd" [(ngModel)]="newData.DateEnd" />
+      </div>
+      <div class="col-md-4 buttonModal">
+        <button (click)="AddProject()" class="btn btn-fill btn-defaultv">
+          Aggiungi Riga
+        </button>
+        <button (click)="back()" class="btn btn-fill btn-default">
+          Annulla
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="dropup-content">
+  <button class="button buttonAddProject" (click)="OpenAddProject()">+</button>
+  <button class="button buttonAddWeek" (click)="AddWeek()">+</button>
+
+</div>
