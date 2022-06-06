@@ -30,7 +30,7 @@ import { ProgettiComponent } from './progetti/progetti.component';
         SidebarModule,
         NavbarModule,
         FooterModule,
-        FixedPluginModule
+        FixedPluginModule,
     ],
     declarations: [
         AppComponent,

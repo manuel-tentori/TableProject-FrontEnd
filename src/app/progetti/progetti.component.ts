@@ -102,8 +102,8 @@ export class ProgettiComponent implements OnInit {
 
   AddWeek() {
     const w = new Week();
-    let i = 0;
-    w.ID = i;
+    let i = this.datas[0].Weeks.length;
+    w.ID = i+1;
     w.ProgressPercWeek = null;
     w.PartialRevenue = null;
 
