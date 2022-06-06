@@ -17,6 +17,7 @@ export class ProgettiComponent implements OnInit {
   public flagApertaAddProject = false;
   public showMyContainer: boolean = false;
 
+  checked = false;
   public newData: Data = new Data();
 
   public datas: any[] = [
@@ -100,23 +101,45 @@ export class ProgettiComponent implements OnInit {
     });
   }
 
-  onChange(index: number, isChecked: boolean) {
+  /*onChange(index: number, isChecked: boolean) {
     if (isChecked) {
-      const w = new Week();
-      let i = this.datas[0].Weeks.length;
-      w.ID = i ;
-      w.ProgressPercWeek = null;
-      w.PartialRevenue = null;
-      this.datas[index].Weeks.push(w);
+    this.AddWeek(index);
     
     } else {
       this.notification.open("Non è stato selezionato nessun progetto", 2);
     }
+  }*/
+
+  AddWeek(index: number) {
+    for (let i = 0; i < this.datas.length; i++) {
+      if (this.checked == true) {
+        const w = new Week();
+        let i = this.datas[0].Weeks.length;
+        w.ID = i;
+        w.ProgressPercWeek = null;
+        w.PartialRevenue = null;
+        this.datas[index].Weeks.push(w);
+      } else {
+        this.notification.open("Non è stato selezionato nessun progetto", 2);
+      }
+    }
   }
 
-  AddWeek() {
-    this.onChange(0, false);
-  }
+  /*AddWeek(index: number) {
+    for (let i=0; i < this.datas.length; i++) {
+    if (this.checked==true){
+
+    }
+    else {
+      this.notification.open("Non è stato selezionato nessun progetto", 2);
+    }
+    const w = new Week();
+    let i = this.datas[0].Weeks.length;
+    w.ID = i ;
+    w.ProgressPercWeek = null;
+    w.PartialRevenue = null;
+    this.datas[index].Weeks.push(w);
+  }*/
 
   Sum(d: Data): number {
     let sum = 0;
@@ -186,4 +209,3 @@ export class Data {
 function isChecked(name: void, string: any, isChecked: any, boolean: any) {
   throw new Error("Function not implemented.");
 }
-

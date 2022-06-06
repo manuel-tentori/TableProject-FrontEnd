@@ -22,7 +22,8 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let d of datas; let i=index">
-                    <td><input type="checkbox" (change)="onChange(i, $event.target.checked)"></td>
+                    <!-- (change)="onChange(i, $event.target.checked)" -->
+                    <td><input type="checkbox" [(ngModel)]="d.isChecked" ></td>
                     <td>{{ d.ID }}</td>
                     <td>{{ d.Title }}</td>
                     <td>{{ d.Revenue }} €</td>
@@ -71,14 +72,6 @@
   <div class="card cooplatModal">
     <div class="card-header"></div>
     <div class="card-content">
-      <div class="col-md-6">
-        <label>{{ supportoTipoClass }}</label>
-        <input type="text" [(ngModel)]="supportoInput" />
-      </div>
-      <div class="col-md-3">
-        <!-- <button class="btn btn-fill btn-default" id="testback" (click)="ChangeResp();Back()">Conferma</button> -->
-        <button (click)="save()" class="btn btn-fill btn-default">Salva</button>
-      </div>
       <div class="col-md-3">
         <button (click)="back()" class="btn btn-fill btn-default">
           Chiudi
