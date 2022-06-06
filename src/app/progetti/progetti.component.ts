@@ -107,8 +107,7 @@ export class ProgettiComponent implements OnInit {
       w.ID = i ;
       w.ProgressPercWeek = null;
       w.PartialRevenue = null;
-
-      this.datas[index].push(w);
+      this.datas[index].Weeks.push(w);
     
     } else {
       this.notification.open("Non è stato selezionato nessun progetto", 2);
@@ -116,7 +115,7 @@ export class ProgettiComponent implements OnInit {
   }
 
   AddWeek() {
-    this.onChange(3, true);
+    this.onChange(, true);
   }
 
   Sum(d: Data): number {
