@@ -16,13 +16,11 @@ export class ProgettiComponent implements OnInit {
   public flagAperta = false;
   public flagApertaAddProject = false;
   public showMyContainer: boolean = false;
-
-  checked = false;
   public newData: Data = new Data();
 
   public datas: any[] = [
     {
-      checked: false,
+      isChecked: false,
       ID: 1,
       Title: "Progetto 1",
       Revenue: 1000,
@@ -37,7 +35,7 @@ export class ProgettiComponent implements OnInit {
       ],
     },
     {
-      checked: false,
+      isChecked: false,
       ID: 2,
       Title: "Progetto 2",
       Revenue: 3450,
@@ -52,7 +50,7 @@ export class ProgettiComponent implements OnInit {
       ],
     },
     {
-      checked: false,
+      isChecked: false,
 
       ID: 3,
       Title: "Progetto 3",
@@ -68,7 +66,7 @@ export class ProgettiComponent implements OnInit {
       ],
     },
     {
-      checked: false,
+      isChecked: false,
 
       ID: 4,
       Title: "Progetto 4",
@@ -83,8 +81,8 @@ export class ProgettiComponent implements OnInit {
         },
       ],
     },
-    {     
-      checked: false,
+    {
+      isChecked: false,
 
       ID: 5,
       Title: "Progetto 5",
@@ -100,6 +98,8 @@ export class ProgettiComponent implements OnInit {
       ],
     },
   ];
+  isChecked: boolean;
+  isMasterSel: any;
 
   constructor(private notification: NotificationService) {}
 
@@ -118,9 +118,19 @@ export class ProgettiComponent implements OnInit {
     }
   }*/
 
+  AllCheckFalse() {
+    this.datas.forEach((d) => {
+      d.isChecked = false;
+    });
+  }
+
+  isAllSelected() {
+
+  }
+
   AddWeek() {
     for (let k = 0; k < this.datas.length; k++) {
-      if (this.checked == true) { 
+      if (this.datas[k].isChecked == true) {
         const w = new Week();
         let i = this.datas[0].Weeks.length;
         w.ID = i;
@@ -129,17 +139,17 @@ export class ProgettiComponent implements OnInit {
         this.datas[k].Weeks.push(w);
       }
     }
+    this.AllCheckFalse();
     for (let k = 0; k < this.datas.length; k++) {
-      if (this.checked == false) { 
+      if (this.isChecked == false) {
         this.notification.open("Non è stato selezionato nessun progetto", 2);
       }
     }
   }
 
-
   /*AddWeek(index: number) {
     for (let i=0; i < this.datas.length; i++) {
-    if (this.checked==true){
+    if (this.isChecked==true){
 
     }
     else {
@@ -206,7 +216,7 @@ export class Week {
 }
 
 export class Data {
-  checked:boolean;
+  isChecked: boolean;
   ID: number;
   Title: string;
   Revenue: number;
