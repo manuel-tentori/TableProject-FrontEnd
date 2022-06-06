@@ -22,6 +22,7 @@ export class ProgettiComponent implements OnInit {
 
   public datas: any[] = [
     {
+      checked: true,
       ID: 1,
       Title: "Progetto 1",
       Revenue: 1000,
@@ -36,6 +37,8 @@ export class ProgettiComponent implements OnInit {
       ],
     },
     {
+      checked: false,
+
       ID: 2,
       Title: "Progetto 2",
       Revenue: 3450,
@@ -50,6 +53,8 @@ export class ProgettiComponent implements OnInit {
       ],
     },
     {
+      checked: false,
+
       ID: 3,
       Title: "Progetto 3",
       Revenue: 44250,
@@ -64,6 +69,8 @@ export class ProgettiComponent implements OnInit {
       ],
     },
     {
+      checked: false,
+
       ID: 4,
       Title: "Progetto 4",
       Revenue: 2134,
@@ -77,7 +84,9 @@ export class ProgettiComponent implements OnInit {
         },
       ],
     },
-    {
+    {     
+      checked: false,
+
       ID: 5,
       Title: "Progetto 5",
       Revenue: 9658,
@@ -110,20 +119,24 @@ export class ProgettiComponent implements OnInit {
     }
   }*/
 
-  AddWeek(index: number) {
-    for (let i = 0; i < this.datas.length; i++) {
-      if (this.checked == true) {
+  AddWeek() {
+    for (let k = 0; k < this.datas.length; k++) {
+      if (this.checked == true) { 
         const w = new Week();
         let i = this.datas[0].Weeks.length;
         w.ID = i;
         w.ProgressPercWeek = null;
         w.PartialRevenue = null;
-        this.datas[index].Weeks.push(w);
-      } else {
+        this.datas[k].Weeks.push(w);
+      }
+    }
+    for (let k = 0; k < this.datas.length; k++) {
+      if (this.checked == false) { 
         this.notification.open("Non è stato selezionato nessun progetto", 2);
       }
     }
   }
+
 
   /*AddWeek(index: number) {
     for (let i=0; i < this.datas.length; i++) {
@@ -194,6 +207,7 @@ export class Week {
 }
 
 export class Data {
+  checked:boolean;
   ID: number;
   Title: string;
   Revenue: number;
