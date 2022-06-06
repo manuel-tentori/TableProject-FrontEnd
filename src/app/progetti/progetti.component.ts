@@ -22,7 +22,7 @@ export class ProgettiComponent implements OnInit {
 
   public datas: any[] = [
     {
-      checked: true,
+      checked: false,
       ID: 1,
       Title: "Progetto 1",
       Revenue: 1000,
@@ -38,7 +38,6 @@ export class ProgettiComponent implements OnInit {
     },
     {
       checked: false,
-
       ID: 2,
       Title: "Progetto 2",
       Revenue: 3450,
