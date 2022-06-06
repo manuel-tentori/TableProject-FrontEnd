@@ -1,8 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { Custom } from "../template";
-import {NotificationService} from "../notification.service";
- 
+import { NotificationService } from "../notification.service";
 
 declare var $: any;
 
@@ -20,7 +19,6 @@ export class ProgettiComponent implements OnInit {
 
   public newData: Data = new Data();
 
-
   public datas: any[] = [
     {
       ID: 1,
@@ -34,7 +32,7 @@ export class ProgettiComponent implements OnInit {
           ProgressPercWeek: null,
           PartialRevenue: null,
         },
-      ]
+      ],
     },
     {
       ID: 2,
@@ -48,7 +46,7 @@ export class ProgettiComponent implements OnInit {
           ProgressPercWeek: null,
           PartialRevenue: null,
         },
-      ]
+      ],
     },
     {
       ID: 3,
@@ -62,7 +60,7 @@ export class ProgettiComponent implements OnInit {
           ProgressPercWeek: null,
           PartialRevenue: null,
         },
-      ]
+      ],
     },
     {
       ID: 4,
@@ -76,7 +74,7 @@ export class ProgettiComponent implements OnInit {
           ProgressPercWeek: null,
           PartialRevenue: null,
         },
-      ]
+      ],
     },
     {
       ID: 5,
@@ -90,9 +88,11 @@ export class ProgettiComponent implements OnInit {
           ProgressPercWeek: null,
           PartialRevenue: null,
         },
-      ]
-    }
+      ],
+    },
   ];
+
+  constructor(private notification: NotificationService) {}
 
   ngOnInit() {
     $("#perc").keyup(function () {
@@ -100,24 +100,24 @@ export class ProgettiComponent implements OnInit {
     });
   }
 
-  onChange(name: string, isChecked: boolean) {
+  onChange(index: number, isChecked: boolean) {
     if (isChecked) {
-      
-    } else {
+      const w = new Week();
+      let i = this.datas[0].Weeks.length;
+      w.ID = index ;
+      w.ProgressPercWeek = null;
+      w.PartialRevenue = null;
 
+      this.datas.forEach((dd) => {
+        dd.Weeks.push(w);
+      });
+    } else {
+      this.notification.open("Non è stato selezionato nessun progetto", 2);
     }
   }
 
   AddWeek() {
-    const w = new Week();
-    let i = this.datas[0].Weeks.length;
-    w.ID = i+1;
-    w.ProgressPercWeek = null;
-    w.PartialRevenue = null;
-
-    this.datas.forEach((dd) => {
-      dd.Weeks.push(w);
-    });
+    this.onChange(3, true);
   }
 
   Sum(d: Data): number {
@@ -185,3 +185,8 @@ export class Data {
     this.Weeks = [];
   }
 }
+
+function isChecked(name: void, string: any, isChecked: any, boolean: any) {
+  throw new Error("Function not implemented.");
+}
+

@@ -16,6 +16,9 @@ import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 import { AppRoutes } from './app.routing';
 import { ProgettiComponent } from './progetti/progetti.component';
+import {MatInputModule} from '@angular/material/input'; 
+import {MatSnackBarModule} from "@angular/material/snack-bar";
+
 
 
 @NgModule({
@@ -31,6 +34,8 @@ import { ProgettiComponent } from './progetti/progetti.component';
         NavbarModule,
         FooterModule,
         FixedPluginModule,
+        MatInputModule,
+        MatSnackBarModule,
     ],
     declarations: [
         AppComponent,
