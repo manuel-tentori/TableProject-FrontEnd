@@ -104,13 +104,12 @@ export class ProgettiComponent implements OnInit {
     if (isChecked) {
       const w = new Week();
       let i = this.datas[0].Weeks.length;
-      w.ID = index ;
+      w.ID = i ;
       w.ProgressPercWeek = null;
       w.PartialRevenue = null;
 
-      this.datas.forEach((dd) => {
-        dd.Weeks.push(w);
-      });
+      this.datas[index].push(w);
+    
     } else {
       this.notification.open("Non è stato selezionato nessun progetto", 2);
     }
@@ -185,7 +184,6 @@ export class Data {
     this.Weeks = [];
   }
 }
-
 function isChecked(name: void, string: any, isChecked: any, boolean: any) {
   throw new Error("Function not implemented.");
 }
