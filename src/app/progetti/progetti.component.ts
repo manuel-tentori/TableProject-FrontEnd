@@ -115,7 +115,7 @@ export class ProgettiComponent implements OnInit {
   }
 
   AddWeek() {
-    this.onChange(, true);
+    this.onChange(0, false);
   }
 
   Sum(d: Data): number {
