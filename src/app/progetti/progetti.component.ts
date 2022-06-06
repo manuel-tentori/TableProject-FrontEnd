@@ -124,9 +124,6 @@ export class ProgettiComponent implements OnInit {
     });
   }
 
-  isAllSelected() {
-
-  }
 
   AddWeek() {
     for (let k = 0; k < this.datas.length; k++) {
@@ -140,11 +137,13 @@ export class ProgettiComponent implements OnInit {
       }
     }
     this.AllCheckFalse();
+
     for (let k = 0; k < this.datas.length; k++) {
-      if (this.isChecked == false) {
+      if (this.datas[k].isChecked == false) {
         this.notification.open("Non è stato selezionato nessun progetto", 2);
       }
     }
+
   }
 
   /*AddWeek(index: number) {
