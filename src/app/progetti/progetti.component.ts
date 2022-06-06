@@ -14,6 +14,7 @@ export class ProgettiComponent implements OnInit {
   isShowDiv = false;
   public flagTab = false;
   public flagAperta = false;
+  selectedAll: any = false;
   public flagApertaAddProject = false;
   public showMyContainer: boolean = false;
   public newData: Data = new Data();
@@ -119,9 +120,22 @@ export class ProgettiComponent implements OnInit {
   }*/
 
   AllCheckFalse() {
+    this.selectedAll=false;
     this.datas.forEach((d) => {
       d.isChecked = false;
     });
+  }
+
+  selectAll() {
+    for (var i = 0; i < this.datas.length; i++) {
+      this.datas[i].isChecked = this.selectedAll;
+    }
+  }
+
+  checkIfAllSelected() {
+    this.selectedAll = this.datas.every(function(d:any) {
+        return d.isChecked == true;
+      })
   }
 
 

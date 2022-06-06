@@ -11,7 +11,7 @@
               <table id="example" class="table-data">
                 <thead>
                   <tr>
-                    <th><input type="checkbox"></th>
+                    <th><mat-checkbox type="checkbox" [(ngModel)]="selectedAll" (change)="selectAll()"></mat-checkbox></th>
                     <th>Rif.</th>
                     <th>Titolo</th>
                     <th>Revenue</th>
@@ -23,7 +23,7 @@
                 <tbody>
                   <tr *ngFor="let d of datas; let i=index">
                     <!-- (change)="onChange(i, $event.target.checked)" -->
-                    <td><input type="checkbox" [(ngModel)]="d.isChecked"></td>
+                    <td><mat-checkbox type="checkbox" [(ngModel)]="d.isChecked" (change)="checkIfAllSelected()"></mat-checkbox></td>
                     <td>{{ d.ID }}</td>
                     <td>{{ d.Title }}</td>
                     <td>{{ d.Revenue }} €</td>

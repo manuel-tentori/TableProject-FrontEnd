@@ -18,6 +18,7 @@ import { AppRoutes } from './app.routing';
 import { ProgettiComponent } from './progetti/progetti.component';
 import {MatInputModule} from '@angular/material/input'; 
 import {MatSnackBarModule} from "@angular/material/snack-bar";
+import {MatCheckboxModule} from '@angular/material/checkbox'; 
 
 
 
@@ -36,6 +37,7 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
         FixedPluginModule,
         MatInputModule,
         MatSnackBarModule,
+        MatCheckboxModule,
     ],
     declarations: [
         AppComponent,
