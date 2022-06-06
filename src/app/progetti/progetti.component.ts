@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { Custom } from "../template";
+import {NotificationService} from "../notification.service";
+ 
 
 declare var $: any;
 
@@ -11,7 +13,6 @@ declare var $: any;
 })
 export class ProgettiComponent implements OnInit {
   isShowDiv = false;
-0
   public flagTab = false;
   public flagAperta = false;
   public flagApertaAddProject = false;
@@ -97,7 +98,14 @@ export class ProgettiComponent implements OnInit {
     $("#perc").keyup(function () {
       var value = $(this).val();
     });
+  }
 
+  onChange(name: string, isChecked: boolean) {
+    if (isChecked) {
+      
+    } else {
+
+    }
   }
 
   AddWeek() {
@@ -135,6 +143,7 @@ export class ProgettiComponent implements OnInit {
     d.Weeks.forEach((w) => {
       partial = (d.Revenue / 100) * w.ProgressPercWeek;
     });
+
     return partial;
   }
 

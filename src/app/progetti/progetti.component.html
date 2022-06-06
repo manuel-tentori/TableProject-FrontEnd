@@ -22,7 +22,7 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let d of datas; let i=index">
-                    <td><input type="checkbox" id=i></td>
+                    <td><input type="checkbox" (change)="onChange(i, $event.target.checked)"></td>
                     <td>{{ d.ID }}</td>
                     <td>{{ d.Title }}</td>
                     <td>{{ d.Revenue }} €</td>
