@@ -12,17 +12,18 @@ export class Week {
     PartialRevenue: number;
   }
   
-  export class Data {
+export class Data {
     isChecked: boolean;
-    ID: number;
-    Title: string;
-    Revenue: number;
-    ProgessPerc: number;
-    DateStart: number;
-    DateEnd: number;
-    Weeks: Week[];
+    rif: number;
+    title: string;
+    revenue: number;
+    progessperc: number;
+    datestart: number;
+    dateend: number;
+    weeks: Week[];
   
     constructor() {
-      this.Weeks = [];
+      this.weeks = [];
     }
   }
+

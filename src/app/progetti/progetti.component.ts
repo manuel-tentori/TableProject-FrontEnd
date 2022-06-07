@@ -2,8 +2,11 @@ import { Component, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { Custom } from "../template";
 import { NotificationService } from "../notification.service";
-import { SendDataService } from "../send-data.service";
+import { DataService } from "../data.service";
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { catchError, retry } from 'rxjs/operators';
 import {Week, Data} from "../template";
+import { Observable, throwError } from 'rxjs';
 import DataJson from "../data.json";
 
 declare var $: any;
@@ -22,18 +25,31 @@ export class ProgettiComponent implements OnInit {
   public showMyContainer: boolean = false;
   public newData: Data = new Data();
 
-  public datas: any[] = DataJson;
+  public datas: Data[];
     
   isChecked: boolean;
   isMasterSel: any;
 
+  getFriends(){
+    this.httpClient.get<any>('http://localhost:8080/api/v1/table').subscribe(
+      (response: any[]) => {
+    
+        console.log(response);
+        this.datas = response;
+      }
+    );
+  }
+
+
   
-  constructor(private notification: NotificationService) {}
+  constructor(private httpClient: HttpClient, private notification: NotificationService) {}
 
   ngOnInit() {
     $("#perc").keyup(function () {
       var value = $(this).val();
     });
+
+    this.getFriends();
   }
 
   /*onChange(index: number, isChecked: boolean) {
@@ -69,11 +85,11 @@ export class ProgettiComponent implements OnInit {
     for (let k = 0; k < this.datas.length; k++) {
       if (this.datas[k].isChecked == true) {
         const w = new Week();
-        let i = this.datas[0].Weeks.length;
+        let i = this.datas[0].weeks.length;
         w.ID = i;
         w.ProgressPercWeek = null;
         w.PartialRevenue = null;
-        this.datas[k].Weeks.push(w);
+        this.datas[k].weeks.push(w);
       }
     }
     this.AllCheckFalse();
@@ -85,6 +101,7 @@ export class ProgettiComponent implements OnInit {
     }
 
   }
+
 
   /*AddWeek(index: number) {
     for (let i=0; i < this.datas.length; i++) {
@@ -104,7 +121,7 @@ export class ProgettiComponent implements OnInit {
 
   Sum(d: Data): number {
     let sum = 0;
-    d.Weeks.forEach((w) => {
+    d.weeks.forEach((w) => {
       sum += w.PartialRevenue;
     });
 
@@ -113,7 +130,7 @@ export class ProgettiComponent implements OnInit {
 
   ProgressPerc(d: Data): number {
     let sum = 0;
-    d.Weeks.forEach((w) => {
+    d.weeks.forEach((w) => {
       sum += w.ProgressPercWeek;
     });
 
@@ -122,8 +139,8 @@ export class ProgettiComponent implements OnInit {
 
   PartialRevenue(d: Data): number {
     let partial;
-    d.Weeks.forEach((w) => {
-      partial = (d.Revenue / 100) * w.ProgressPercWeek;
+    d.weeks.forEach((w) => {
+      partial = (d.revenue / 100) * w.ProgressPercWeek;
     });
 
     return partial;
@@ -143,7 +160,7 @@ export class ProgettiComponent implements OnInit {
     let w = new Week();
     w.ProgressPercWeek = null;
     w.PartialRevenue = null;
-    this.newData.Weeks.push(w);
+    this.newData.weeks.push(w);
     this.datas.push(DataClone);
 
     this.flagApertaAddProject = false;

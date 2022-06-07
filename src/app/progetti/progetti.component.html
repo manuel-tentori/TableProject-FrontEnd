@@ -11,7 +11,7 @@
               <table id="example" class="table-data">
                 <thead>
                   <tr>
-                    <th><mat-checkbox type="checkbox" [(ngModel)]="selectedAll" (change)="selectAll()"></mat-checkbox></th>
+                    <th><mat-checkbox [(ngModel)]="selectedAll" (change)="selectAll()"></mat-checkbox></th>
                     <th>Rif.</th>
                     <th>Titolo</th>
                     <th>Revenue</th>
@@ -23,13 +23,13 @@
                 <tbody>
                   <tr *ngFor="let d of datas; let i=index">
                     <!-- (change)="onChange(i, $event.target.checked)" -->
-                    <td><mat-checkbox type="checkbox" [(ngModel)]="d.isChecked" (change)="checkIfAllSelected()"></mat-checkbox></td>
-                    <td>{{ d.ID }}</td>
-                    <td>{{ d.Title }}</td>
-                    <td>{{ d.Revenue }} €</td>
+                    <td><mat-checkbox  [(ngModel)]="d.isChecked" (change)="checkIfAllSelected()"></mat-checkbox></td>
+                    <td>{{ d.rif }}</td>
+                    <td>{{ d.title }}</td>
+                    <td>{{ d.revenue }} €</td>
                     <td>{{ ProgressPerc(d) }}%</td>
-                    <td>{{ d.DateStart | date }}</td>
-                    <td>{{ d.DateEnd | date }}</td>
+                    <td>{{ d.datestart | date }}</td>
+                    <td>{{ d.dateend | date }}</td>
                     <hr />
                   </tr>
                 </tbody>
@@ -37,7 +37,7 @@
 
               <div class="weeks-content">
                 <div class="container-weeks-table" *ngFor="let d of datas; let k = index">
-                  <div id="example1" class="table-weeks" *ngFor="let w of d.Weeks; let i= index">
+                  <div id="example1" class="table-weeks" *ngFor="let w of d.weeks; let i= index">
                     <div *ngIf="k == 0">
                       <tr>
                         <th>Settimana {{ i + 1 }}</th>
@@ -87,23 +87,23 @@
     <div class="card-content">
       <div class="col-md-4">
         <label>Rif.</label>
-        <input type="text" [(ngModel)]="newData.ID" />
+        <input type="text" [(ngModel)]="newData.rif" />
       </div>
       <div class="col-md-4">
         <label>Titolo</label>
-        <input type="text" [(ngModel)]="newData.Title" />
+        <input type="text" [(ngModel)]="newData.title" />
       </div>
       <div class="col-md-4">
         <label>Revenue</label>
-        <input type="number" [(ngModel)]="newData.Revenue" />
+        <input type="number" [(ngModel)]="newData.revenue" />
       </div>
       <div class="col-md-4">
         <label>Data inizio</label>
-        <input type="date" id="DateStart" [(ngModel)]="newData.DateStart" />
+        <input type="date" id="DateStart" [(ngModel)]="newData.datestart" />
       </div>
       <div class="col-md-4">
         <label>Data fine</label>
-        <input type="date" id="DateEnd" [(ngModel)]="newData.DateEnd" />
+        <input type="date" id="DateEnd" [(ngModel)]="newData.dateend" />
       </div>
       <div class="col-md-4 buttonModal">
         <button (click)="AddProject()" class="btn btn-fill btn-defaultv">
