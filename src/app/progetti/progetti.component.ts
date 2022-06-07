@@ -8,7 +8,7 @@ import { catchError, retry } from 'rxjs/operators';
 import {Week, Data} from "../template";
 import { Observable, throwError } from 'rxjs';
 import DataJson from "../data.json";
-
+import { map } from 'rxjs/operators';
 declare var $: any;
 
 @Component({
@@ -30,16 +30,24 @@ export class ProgettiComponent implements OnInit {
   isChecked: boolean;
   isMasterSel: any;
 
-  getFriends(){
-    this.httpClient.get<any>('http://localhost:8080/api/v1/table').subscribe(
-      (response: any[]) => {
+  // getFriends(){
+  //   this.httpClient.get<any>('http://localhost:8080/api/v1/table').subscribe(
+  //     (response: any[]) => {
     
-        console.log(response);
-        this.datas = response;
-      }
-    );
-  }
+  //       console.log(response);
+  //       this.datas = response;
+  //     }
+  //   );
+  // }
 
+  getFriends() {
+    this.httpClient.get(`http://localhost:8080/api/v1/table`)
+      .pipe(map(response => response.json().items)) // <------
+      .subscribe(
+        data => this.datas = data,
+        error => console.log(error)
+      );
+  }
 
   
   constructor(private httpClient: HttpClient, private notification: NotificationService) {}
