@@ -4,6 +4,7 @@ import { Custom } from "../template";
 import { NotificationService } from "../notification.service";
 import { SendDataService } from "../send-data.service";
 import {Week, Data} from "../template";
+import DataJson from "../data.json";
 
 declare var $: any;
 
@@ -21,89 +22,12 @@ export class ProgettiComponent implements OnInit {
   public showMyContainer: boolean = false;
   public newData: Data = new Data();
 
-  public datas: any[] = [
-    {
-      isChecked: false,
-      ID: 1,
-      Title: "Progetto 1",
-      Revenue: 1000,
-      DateStart: new Date(2022, 1, 1).getTime(),
-      DateEnd: new Date(2022, 12, 31).getTime(),
-      Weeks: [
-        {
-          id: 1,
-          ProgressPercWeek: null,
-          PartialRevenue: null,
-        },
-      ],
-    },
-    {
-      isChecked: false,
-      ID: 2,
-      Title: "Progetto 2",
-      Revenue: 3450,
-      DateStart: new Date(2022, 1, 1).getTime(),
-      DateEnd: new Date(2022, 12, 31).getTime(),
-      Weeks: [
-        {
-          id: 1,
-          ProgressPercWeek: null,
-          PartialRevenue: null,
-        },
-      ],
-    },
-    {
-      isChecked: false,
-
-      ID: 3,
-      Title: "Progetto 3",
-      Revenue: 44250,
-      DateStart: new Date(2022, 1, 1).getTime(),
-      DateEnd: new Date(2022, 12, 31).getTime(),
-      Weeks: [
-        {
-          id: 1,
-          ProgressPercWeek: null,
-          PartialRevenue: null,
-        },
-      ],
-    },
-    {
-      isChecked: false,
-
-      ID: 4,
-      Title: "Progetto 4",
-      Revenue: 2134,
-      DateStart: new Date(2022, 1, 1).getTime(),
-      DateEnd: new Date(2022, 12, 31).getTime(),
-      Weeks: [
-        {
-          id: 1,
-          ProgressPercWeek: null,
-          PartialRevenue: null,
-        },
-      ],
-    },
-    {
-      isChecked: false,
-
-      ID: 5,
-      Title: "Progetto 5",
-      Revenue: 9658,
-      DateStart: new Date(2022, 1, 1).getTime(),
-      DateEnd: new Date(2022, 12, 31).getTime(),
-      Weeks: [
-        {
-          id: 1,
-          ProgressPercWeek: null,
-          PartialRevenue: null,
-        },
-      ],
-    },
-  ];
+  public datas: any[] = DataJson;
+    
   isChecked: boolean;
   isMasterSel: any;
 
+  
   constructor(private notification: NotificationService) {}
 
   ngOnInit() {
