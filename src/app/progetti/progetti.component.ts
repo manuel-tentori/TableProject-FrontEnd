@@ -2,6 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { Custom } from "../template";
 import { NotificationService } from "../notification.service";
+import { SendDataService } from "../send-data.service";
+import {Week, Data} from "../template";
 
 declare var $: any;
 
@@ -225,26 +227,7 @@ export class ProgettiComponent implements OnInit {
   
 }
 
-export class Week {
-  ID: number;
-  ProgressPercWeek: number;
-  PartialRevenue: number;
-}
 
-export class Data {
-  isChecked: boolean;
-  ID: number;
-  Title: string;
-  Revenue: number;
-  ProgessPerc: number;
-  DateStart: number;
-  DateEnd: number;
-  Weeks: Week[];
-
-  constructor() {
-    this.Weeks = [];
-  }
-}
 function isChecked(name: void, string: any, isChecked: any, boolean: any) {
   throw new Error("Function not implemented.");
 }
