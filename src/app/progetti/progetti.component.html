@@ -85,25 +85,26 @@
   <div class="card card1 cooplatModal">
     <div class="card-header"></div>
     <div class="card-content">
+      <form #f="ngForm" (ngSubmit)="onSubmit(f)">
       <div class="col-md-4">
         <label>Rif.</label>
-        <input type="text" [(ngModel)]="newData.rif" />
+        <input id="rif" type="text" [(ngModel)]="newData.rif" />
       </div>
       <div class="col-md-4">
         <label>Titolo</label>
-        <input type="text" [(ngModel)]="newData.title" />
+        <input id="title" type="text" [(ngModel)]="newData.title" />
       </div>
       <div class="col-md-4">
         <label>Revenue</label>
-        <input type="number" [(ngModel)]="newData.revenue" />
+        <input id="revenue" type="number" [(ngModel)]="newData.revenue" />
       </div>
       <div class="col-md-4">
         <label>Data inizio</label>
-        <input type="date" id="DateStart" [(ngModel)]="newData.datestart" />
+        <input id="datestart" type="date" [(ngModel)]="newData.datestart" />
       </div>
       <div class="col-md-4">
         <label>Data fine</label>
-        <input type="date" id="DateEnd" [(ngModel)]="newData.dateend" />
+        <input type="date" id="dateend" [(ngModel)]="newData.dateend" />
       </div>
       <div class="col-md-4 buttonModal">
         <button (click)="AddProject()" class="btn btn-fill btn-defaultv">
@@ -113,6 +114,7 @@
           Annulla
         </button>
       </div>
+    </form>
     </div>
   </div>
 </div>

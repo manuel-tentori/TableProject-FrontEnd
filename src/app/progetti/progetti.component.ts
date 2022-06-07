@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormsModule } from "@angular/forms";
+import { FormsModule, NgForm } from "@angular/forms";
 import { Custom } from "../template";
 import { NotificationService } from "../notification.service";
 import { DataService } from "../data.service";
@@ -9,6 +9,7 @@ import {Week, Data} from "../template";
 import { Observable, throwError } from 'rxjs';
 import DataJson from "../data.json";
 import { map } from 'rxjs/operators';
+
 declare var $: any;
 
 @Component({
@@ -154,7 +155,7 @@ export class ProgettiComponent implements OnInit {
     this.flagApertaAddProject = false;
   }
 
-  AddProject() {
+  AddProject(f: NgForm) {
     const DataClone = Object.assign([], this.newData);
     let w = new Week();
     w.ProgressPercWeek = null;
@@ -163,8 +164,17 @@ export class ProgettiComponent implements OnInit {
     this.datas.push(DataClone);
 
     this.flagApertaAddProject = false;
+
   };
   
+
+  onSubmit(f: NgForm) {
+    const url = 'http://localhost:8080/api/v1/table';
+    this.httpClient.post(url, f.value)
+      .subscribe((result) => {
+        this.ngOnInit(); //reload the table
+      });
+  }
 }
 
 

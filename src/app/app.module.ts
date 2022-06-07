@@ -21,7 +21,6 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatCheckboxModule} from '@angular/material/checkbox'; 
 import { HttpClientModule } from '@angular/common/http';
 
-
 @NgModule({
     imports:      [
         BrowserAnimationsModule,
@@ -39,6 +38,7 @@ import { HttpClientModule } from '@angular/common/http';
         MatSnackBarModule,
         MatCheckboxModule,
         HttpClientModule,
+        FormsModule,
     ],
     declarations: [
         AppComponent,
