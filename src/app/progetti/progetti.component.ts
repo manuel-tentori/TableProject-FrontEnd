@@ -219,7 +219,10 @@ export class ProgettiComponent implements OnInit {
     w.PartialRevenue = null;
     this.newData.Weeks.push(w);
     this.datas.push(DataClone);
-  }
+
+    this.flagApertaAddProject = false;
+  };
+  
 }
 
 export class Week {
