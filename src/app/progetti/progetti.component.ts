@@ -30,23 +30,14 @@ export class ProgettiComponent implements OnInit {
   isChecked: boolean;
   isMasterSel: any;
 
-  // getFriends(){
-  //   this.httpClient.get<any>('http://localhost:8080/api/v1/table').subscribe(
-  //     (response: any[]) => {
+  getFriends(){
+    this.httpClient.get<any>('http://localhost:8080/api/v1/table').subscribe(
+      (response: any[]) => {
     
-  //       console.log(response);
-  //       this.datas = response;
-  //     }
-  //   );
-  // }
-
-  getFriends() {
-    this.httpClient.get(`http://localhost:8080/api/v1/table`)
-      .pipe(map(response => response.json().items)) // <------
-      .subscribe(
-        data => this.datas = data,
-        error => console.log(error)
-      );
+        console.log(response);
+        this.datas = response;
+      }
+    );
   }
 
   
