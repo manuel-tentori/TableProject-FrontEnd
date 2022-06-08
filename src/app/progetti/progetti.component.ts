@@ -12,6 +12,8 @@ import { map } from 'rxjs/operators';
 
 declare var $: any;
 
+
+
 @Component({
   selector: "app-progetti",
   templateUrl: "./progetti.component.html",
@@ -24,32 +26,32 @@ export class ProgettiComponent implements OnInit {
   selectedAll: any = false;
   public flagApertaAddProject = false;
   public showMyContainer: boolean = false;
-  public newData: Data = new Data();
+  //public newData: Data = new Data();
 
-  public datas: Data[];
-    
+  public datas: any = [];
+
+   // public datas: any = DataJson;
   isChecked: boolean;
   isMasterSel: any;
 
-  getFriends(){
-    this.httpClient.get<any>('http://localhost:8080/api/v1/table').subscribe(
-      (response: any[]) => {
-    
+  loadProjects(){
+    this.httpClient.get<any>('http://localhost:8080/api/v1/table/').subscribe(
+      (response: Data[]) => {
         console.log(response);
         this.datas = response;
       }
     );
   }
-
   
-  constructor(private httpClient: HttpClient, private notification: NotificationService) {}
+  constructor(private _data: DataService, private httpClient: HttpClient, private notification: NotificationService) {}
 
   ngOnInit() {
     $("#perc").keyup(function () {
       var value = $(this).val();
     });
 
-    this.getFriends();
+    //this.getFriends();
+    this.loadProjects();
   }
 
   /*onChange(index: number, isChecked: boolean) {
@@ -86,7 +88,7 @@ export class ProgettiComponent implements OnInit {
       if (this.datas[k].isChecked == true) {
         const w = new Week();
         let i = this.datas[0].weeks.length;
-        w.ID = i;
+        w.id = i;
         w.ProgressPercWeek = null;
         w.PartialRevenue = null;
         this.datas[k].weeks.push(w);
@@ -119,32 +121,35 @@ export class ProgettiComponent implements OnInit {
     this.datas[index].Weeks.push(w);
   }*/
 
-  Sum(d: Data): number {
-    let sum = 0;
-    d.weeks.forEach((w) => {
-      sum += w.PartialRevenue;
-    });
 
-    return sum;
-  }
 
-  ProgressPerc(d: Data): number {
-    let sum = 0;
-    d.weeks.forEach((w) => {
-      sum += w.ProgressPercWeek;
-    });
 
-    return sum;
-  }
+  // Sum(d: Data): number {
+  //   let sum = 0;
+  //   d.weeks.forEach((w) => {
+  //     sum += w.PartialRevenue;
+  //   });
 
-  PartialRevenue(d: Data): number {
-    let partial;
-    d.weeks.forEach((w) => {
-      partial = (d.revenue / 100) * w.ProgressPercWeek;
-    });
+  //   return sum;
+  // }
 
-    return partial;
-  }
+  // ProgressPerc(d: Data): number {
+  //   let sum = 0;
+  //   d.weeks.forEach((w) => {
+  //     sum += w.ProgressPercWeek;
+  //   });
+
+  //   return sum;
+  // }
+
+  // PartialRevenue(d: Data): number {
+  //   let partial;
+  //   d.weeks.forEach((w) => {
+  //     partial = (d.revenue / 100) * w.ProgressPercWeek;
+  //   });
+
+  //   return partial;
+  // }
 
   OpenAddProject() {
     this.flagApertaAddProject = true;
@@ -155,7 +160,7 @@ export class ProgettiComponent implements OnInit {
     this.flagApertaAddProject = false;
   }
 
-  AddProject(f: NgForm) {
+  /*AddProject(f: NgForm) {
     const DataClone = Object.assign([], this.newData);
     let w = new Week();
     w.ProgressPercWeek = null;
@@ -165,7 +170,7 @@ export class ProgettiComponent implements OnInit {
 
     this.flagApertaAddProject = false;
 
-  };
+  };*/
   
 
   onSubmit(f: NgForm) {

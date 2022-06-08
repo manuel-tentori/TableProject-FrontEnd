@@ -1,12 +1,12 @@
 [
     {
       "isChecked": false,
-      "ID": 1,
-      "Title": "Progetto 1",
-      "Revenue": 1000,
-      "DateStart": "01/01/2019",
-      "DateEnd": "01/01/2020",
-      "Weeks": [
+      "rif": 1,
+      "title": "Progetto 1",
+      "revenue": 1000,
+      "datestart": "01/01/2019",
+      "dateend": "01/01/2020",
+      "weeks": [
         {
           "id": 1,
           "ProgressPercWeek": null,
@@ -16,12 +16,12 @@
     },
     {
       "isChecked": false,
-      "ID": 2,
-      "Title": "Progetto 2",
-      "Revenue": 3450,
-      "DateStart": "01/01/2019",
-      "DateEnd": "01/01/2020",
-      "Weeks": [
+      "rif": 2,
+      "title": "Progetto 2",
+      "revenue": 3450,
+      "datestart": "01/01/2019",
+      "dateend": "01/01/2020",
+      "weeks": [
         {
           "id": 1,
           "ProgressPercWeek": null,
@@ -31,12 +31,12 @@
     },
     {
       "isChecked": false,
-      "ID": 3,
-      "Title": "Progetto 3",
-      "Revenue": 44250,
-      "DateStart": "01/01/2019",
-      "DateEnd": "01/01/2020",
-      "Weeks": [
+      "rif": 3,
+      "title": "Progetto 3",
+      "revenue": 44250,
+      "datestart": "01/01/2019",
+      "dateend": "01/01/2020",
+      "weeks": [
         {
           "id": 1,
           "ProgressPercWeek": null,
@@ -46,12 +46,12 @@
     },
     {
       "isChecked": false,
-      "ID": 4,
-      "Title": "Progetto 4",
-      "Revenue": 2134,
-      "DateStart": "01/01/2019",
-      "DateEnd": "01/01/2020",
-      "Weeks": [
+      "rif": 4,
+      "title": "Progetto 4",
+      "revenue": 2134,
+      "datestart": "01/01/2019",
+      "dateend": "01/01/2020",
+      "weeks": [
         {
           "id": 1,
           "ProgressPercWeek": null,
@@ -61,12 +61,12 @@
     },
     {
       "isChecked": false,
-      "ID": 5,
-      "Title": "Progetto 5",
-      "Revenue": 9658,
-      "DateStart": "01/01/2019",
-      "DateEnd": "01/01/2020",
-      "Weeks": [
+      "rif": 5,
+      "title": "Progetto 5",
+      "revenue": 9658,
+      "datestart": "01/01/2019",
+      "dateend": "01/01/2020",
+      "weeks": [
         {
           "id": 1,
           "ProgressPercWeek": null,

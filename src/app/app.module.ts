@@ -20,6 +20,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatCheckboxModule} from '@angular/material/checkbox'; 
 import { HttpClientModule } from '@angular/common/http';
+import {MatTableModule} from '@angular/material/table'; 
 
 @NgModule({
     imports:      [
@@ -39,6 +40,7 @@ import { HttpClientModule } from '@angular/common/http';
         MatCheckboxModule,
         HttpClientModule,
         FormsModule,
+        MatTableModule,
     ],
     declarations: [
         AppComponent,

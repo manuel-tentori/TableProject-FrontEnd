@@ -8,6 +8,7 @@
               <h4 class="card-title">PROGETTI</h4>
             </div>
             <div class="div-table-content">
+
               <table id="example" class="table-data">
                 <thead>
                   <tr>
@@ -22,26 +23,25 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let d of datas; let i=index">
-                    <!-- (change)="onChange(i, $event.target.checked)" -->
                     <td><mat-checkbox  [(ngModel)]="d.isChecked" (change)="checkIfAllSelected()"></mat-checkbox></td>
                     <td>{{ d.rif }}</td>
                     <td>{{ d.title }}</td>
                     <td>{{ d.revenue }} €</td>
-                    <td>{{ ProgressPerc(d) }}%</td>
+                    <!-- <td>{{ ProgressPerc(d) }}%</td> -->
                     <td>{{ d.datestart | date }}</td>
                     <td>{{ d.dateend | date }}</td>
                     <hr />
                   </tr>
                 </tbody>
-              </table>
+              </table> 
 
-              <div class="weeks-content">
+               <div class="weeks-content">
                 <div class="container-weeks-table" *ngFor="let d of datas; let k = index">
                   <div id="example1" class="table-weeks" *ngFor="let w of d.weeks; let i= index">
                     <div *ngIf="k == 0">
                       <tr>
                         <th>Settimana {{ i + 1 }}</th>
-                        <th>{{ Sum(d) }}</th>
+                        <!-- <th>{{ Sum(d) }}</th> -->
                       </tr>
                     </div>
                     <div class="tbody">
@@ -81,7 +81,7 @@
   </div>
 </div>
 
-<div class="main-content over" *ngIf="flagApertaAddProject">
+<!-- <div class="main-content over" *ngIf="flagApertaAddProject">
   <div class="card card1 cooplatModal">
     <div class="card-header"></div>
     <div class="card-content">
@@ -117,12 +117,11 @@
     </form>
     </div>
   </div>
-</div>
+</div> -->
 
 
 
 <div class="dropup-content">
   <button class="button buttonAddProject" (click)="OpenAddProject()">+</button>
   <button class="button buttonAddWeek" (click)="AddWeek()">+</button>
-
 </div>
