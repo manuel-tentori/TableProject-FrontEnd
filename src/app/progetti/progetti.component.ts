@@ -3,18 +3,16 @@ import { FormsModule, NgForm } from "@angular/forms";
 import { Custom } from "../template";
 import { NotificationService } from "../notification.service";
 import { DataService } from "../data.service";
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError, retry } from 'rxjs/operators';
-import {Week, Data} from "../template";
-import { Observable, throwError } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import { catchError, retry } from "rxjs/operators";
+import { Week, Data } from "../template";
+import { Observable, throwError } from "rxjs";
 import DataJson from "../data.json";
-import { map } from 'rxjs/operators';
-import axios, {Axios} from 'axios';
+import { map } from "rxjs/operators";
+import axios, { Axios } from "axios";
 import { parse } from "url";
 
 declare var $: any;
-
-
 
 @Component({
   selector: "app-progetti",
@@ -28,34 +26,26 @@ export class ProgettiComponent implements OnInit {
   selectedAll: any = false;
   public flagApertaAddProject = false;
   public showMyContainer: boolean = false;
-  //public newData: Data = new Data();
+  public newData: Data = new Data();
 
   public datas: any = [];
 
-   //public datas: any = DataJson;
+  //public datas: any = DataJson;
   isChecked: boolean;
   isMasterSel: any;
 
-  // loadProjects(){
-  //   this.httpClient.get<any>('http://localhost:8080/api/v1/table/').subscribe(
-  //     (response: any[]) => {
-  //       console.log(.json(response));
-  //       response.forEach(project => {
-  //         console.log(project.title);
-  //       });
-  //     }
-  //   );
-  // }
-
-
-  loadProjects(){
-    axios.get('http://localhost:8080/api/v1/table/').then(response => {
+  loadProjects() {
+    axios.get("http://localhost:8080/api/v1/table/").then((response) => {
       console.log(response.data);
       this.datas = response.data;
     });
-}
-  
-  constructor(private _data: DataService, private httpClient: HttpClient, private notification: NotificationService) {}
+  }
+
+  constructor(
+    private _data: DataService,
+    private httpClient: HttpClient,
+    private notification: NotificationService
+  ) {}
 
   ngOnInit() {
     $("#perc").keyup(function () {
@@ -66,17 +56,8 @@ export class ProgettiComponent implements OnInit {
     this.loadProjects();
   }
 
-  /*onChange(index: number, isChecked: boolean) {
-    if (isChecked) {
-    this.AddWeek(index);
-    
-    } else {
-      this.notification.open("Non è stato selezionato nessun progetto", 2);
-    }
-  }*/
-
   AllCheckFalse() {
-    this.selectedAll=false;
+    this.selectedAll = false;
     this.datas.forEach((d) => {
       d.isChecked = false;
     });
@@ -89,11 +70,10 @@ export class ProgettiComponent implements OnInit {
   }
 
   checkIfAllSelected() {
-    this.selectedAll = this.datas.every(function(d:any) {
-        return d.isChecked == true;
-      })
+    this.selectedAll = this.datas.every(function (d: any) {
+      return d.isChecked == true;
+    });
   }
-
 
   AddWeek() {
     for (let k = 0; k < this.datas.length; k++) {
@@ -113,28 +93,20 @@ export class ProgettiComponent implements OnInit {
         this.notification.open("Non è stato selezionato nessun progetto", 2);
       }
     }
+  }
 
+  EditProject() {
+    this.notification.open("Non è stato selezionato nessun progetto", 2);
   }
 
 
-  // AddWeek(index: number) {
-  //   for (let i=0; i < this.datas.length; i++) {
-  //   if (this.isChecked==true){
-
-  //   }
-  //   else {
-  //     this.notification.open("Non è stato selezionato nessun progetto", 2);
-  //   }
-  //   const w = new Week();
-  //   let i = this.datas[0].Weeks.length;
-  //   w.id = i;
-  //   w.ProgressPercWeek = null;
-  //   w.PartialRevenue = null;
-  //   this.datas[index].Weeks.push(w);
-  // }
-
-
-
+  DeleteProject() {
+    axios.delete('http://localhost:8080/api/v1/table/62a0804db88d0b59ce1f0b54').then((response) => {
+      console.log(response)
+      this.ngOnInit(); //reload the table
+    });
+    this.notification.open("Non è stato selezionato nessun progetto", 2);
+  }
 
   Sum(d: Data): number {
     let sum = 0;
@@ -172,28 +144,24 @@ export class ProgettiComponent implements OnInit {
     this.flagApertaAddProject = false;
   }
 
-  // AddProject() {
-  //   const DataClone = Object.assign([], this.newData);
-  //   let w = new Week();
-  //   w.ProgressPercWeek = null;
-  //   w.PartialRevenue = null;
-  //   this.newData.weeks.push(w);
-  //   this.datas.push(DataClone);
+  AddProject() {
+    const DataClone = Object.assign([], this.newData);
+    let w = new Week();
+    w.ProgressPercWeek = null;
+    w.PartialRevenue = null;
+    this.newData.weeks.push(w);
+    this.datas.push(DataClone);
 
-  //   this.flagApertaAddProject = false;
+    this.flagApertaAddProject = false;
+  }
 
-  // };
-  
-
-  // onSubmit(f: NgForm) {
-  //   const url = 'http://localhost:8080/api/v1/table';
-  //   this.httpClient.post(url, f.value)
-  //     .subscribe((result) => {
-  //       this.ngOnInit(); //reload the table
-  //     });
-  // }
+  onSubmit(f: NgForm) {
+    const url = "http://localhost:8080/api/v1/table";
+    this.httpClient.post(url, f.value).subscribe((result) => {
+      this.ngOnInit(); //reload the table
+    });
+  }
 }
-
 
 function isChecked(name: void, string: any, isChecked: any, boolean: any) {
   throw new Error("Function not implemented.");

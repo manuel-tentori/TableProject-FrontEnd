@@ -2,8 +2,8 @@ export class Custom {
     id: number;
     title: string;
     revenue: number;
-    datestart: number;
-    dateend: number;
+    datestart: string;
+    dateend: string;
 }
 
 export class Week {
@@ -18,8 +18,8 @@ export class Data {
     title: string;
     revenue: number;
     progessperc: number;
-    datestart: number;
-    dateend: number;
+    datestart: string;
+    dateend: string;
     weeks: Week[];
   
     constructor() {

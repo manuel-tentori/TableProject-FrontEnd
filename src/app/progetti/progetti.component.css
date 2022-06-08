@@ -103,6 +103,22 @@
     border-spacing: 30px 10px;
     width: 60%;
   }
+
+.delete-icon {
+  margin-top:15px;
+  position: absolute;
+  right: 20px;
+}
+
+.edit-icon {
+  margin-top:15px;
+  position: absolute;
+  right:70px;
+}
+
+  .toolbar {
+display: flex;  
+}
   
   .table-data thead {
     font-size: 15px;
