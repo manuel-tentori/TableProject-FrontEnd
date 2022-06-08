@@ -13,15 +13,17 @@ export class Week {
   }
   
 export class Data {
-  constructor(
-    isChecked: boolean,
-    rif: number,
-    title: string,
-    revenue: number,
-    progessperc: number,
-    datestart: number,
-    dateend: number,
-    weeks: Week[],
-  ) {}
-}
+    isChecked: boolean;
+    rif: number;
+    title: string;
+    revenue: number;
+    progessperc: number;
+    datestart: number;
+    dateend: number;
+    weeks: Week[];
+  
+    constructor() {
+      this.weeks = [];
+    }
+  }
 

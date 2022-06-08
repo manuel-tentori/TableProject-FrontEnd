@@ -27,7 +27,7 @@
                     <td>{{ d.rif }}</td>
                     <td>{{ d.title }}</td>
                     <td>{{ d.revenue }} €</td>
-                    <!-- <td>{{ ProgressPerc(d) }}%</td> -->
+                    <td>{{ ProgressPerc(d) }}%</td>
                     <td>{{ d.datestart | date }}</td>
                     <td>{{ d.dateend | date }}</td>
                     <hr />
@@ -41,7 +41,7 @@
                     <div *ngIf="k == 0">
                       <tr>
                         <th>Settimana {{ i + 1 }}</th>
-                        <!-- <th>{{ Sum(d) }}</th> -->
+                        <th>{{ Sum(d) }}</th>
                       </tr>
                     </div>
                     <div class="tbody">
