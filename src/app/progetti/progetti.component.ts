@@ -25,6 +25,7 @@ export class ProgettiComponent implements OnInit {
   public flagAperta = false;
   selectedAll: any = false;
   public flagApertaAddProject = false;
+  public flagApertaEditProject = false;
   public showMyContainer: boolean = false;
   public newData: Data = new Data();
 
@@ -96,16 +97,28 @@ export class ProgettiComponent implements OnInit {
   }
 
   EditProject() {
-    this.notification.open("Non è stato selezionato nessun progetto", 2);
-  }
-
-
-  DeleteProject() {
-    axios.delete('http://localhost:8080/api/v1/table/62a0804db88d0b59ce1f0b54').then((response) => {
-      console.log(response)
-      this.ngOnInit(); //reload the table
+    axios.delete("http://localhost:8080/api/v1/table/").then((response) => {
+      console.log(response);
     });
     this.notification.open("Non è stato selezionato nessun progetto", 2);
+
+    this.flagApertaAddProject = false;
+    this.AllCheckFalse();
+
+  }
+
+  DeleteProject() {
+    for (let k = 0; k < this.datas.length; k++) {
+      if (this.datas[k].isChecked == true) {
+        axios
+          .delete("http://localhost:8080/api/v1/table/0")
+          .then((response) => {
+            console.log(response);
+          });
+        this.notification.open("Non è stato selezionato nessun progetto", 2);
+      }
+    }
+    this.AllCheckFalse();
   }
 
   Sum(d: Data): number {
@@ -139,13 +152,28 @@ export class ProgettiComponent implements OnInit {
     this.flagApertaAddProject = true;
   }
 
+  OpenEditProject() {
+    for (let k = 0; k < this.datas.length; k++) {
+      if (this.datas[k].isChecked == true) {
+        this.flagApertaAddProject = true;
+      } else if( this.datas.isChecked == true ) {
+        this.notification.open("Selezionare solo un progetto", 2);
+      }
+      else{
+        this.notification.open("Non è stato selezionato nessun progetto", 2);
+      }
+    }
+  }
+
   back() {
     this.flagAperta = false;
     this.flagApertaAddProject = false;
+    this.flagApertaEditProject = false;
   }
 
   AddProject() {
     const DataClone = Object.assign([], this.newData);
+    DataClone.progessperc = 0;
     let w = new Week();
     w.ProgressPercWeek = null;
     w.PartialRevenue = null;

@@ -6,7 +6,7 @@
           <div class="card-content">
             <div class="toolbar">
               <h4 class="card-title">PROGETTI</h4>
-              <button mat-icon-button (click)="EditProject()" class="edit-icon">
+              <button mat-icon-button (click)="OpenEditProject()" class="edit-icon">
                 <mat-icon >edit</mat-icon> 
               </button>
               <button mat-icon-button (click)="DeleteProject()" class="delete-icon">
@@ -31,12 +31,12 @@
                 <tbody>
                   <tr *ngFor="let d of datas; let i=index">
                     <td><mat-checkbox  [(ngModel)]="d.isChecked" (change)="checkIfAllSelected()"></mat-checkbox></td>
-                    <td>{{ d.rif }}</td>
+                    <td>{{ d.id }}</td>
                     <td>{{ d.title }}</td>
                     <td>{{ d.revenue }} €</td>
                     <td>{{ ProgressPerc(d) }}%</td>
-                    <td>{{ d.datestart | date }}</td>
-                    <td>{{ d.dateend | date }}</td>
+                    <td>{{ d.datestart }}</td>
+                    <td>{{ d.dateend }}</td>
                     <hr />
                   </tr>
                 </tbody>
@@ -93,9 +93,40 @@
     <div class="card-content">
       <form #f="ngForm" (ngSubmit)="onSubmit(f)">
       <div class="col-md-4">
-        <label>Rif.</label>
-        <input id="rif" type="text" [(ngModel)]="newData.rif" />
+        <label>Titolo</label>
+        <input id="title" type="text" [(ngModel)]="newData.title" />
       </div>
+      <div class="col-md-4">
+        <label>Revenue</label>
+        <input id="revenue" type="number" [(ngModel)]="newData.revenue" />
+      </div>
+      <div class="col-md-4">
+        <label>Data inizio</label>
+        <input id="datestart" type="date" [(ngModel)]="newData.dateStart" />
+      </div>
+      <div class="col-md-4">
+        <label>Data fine</label>
+        <input type="date" id="dateend" [(ngModel)]="newData.dateEnd" />
+      </div>
+      <div class="col-md-4 buttonModal">
+        <button (click)="AddProject()" class="btn btn-fill btn-defaultv">
+          Aggiungi Progetto
+        </button>
+        <button (click)="back()" class="btn btn-fill btn-default">
+          Annulla
+        </button>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+
+<div class="main-content over" *ngIf="flagApertaEditProject">
+  <div class="card card1 cooplatModal">
+    <div class="card-header"></div>
+    <div class="card-content">
+      <form #f="ngForm" (ngSubmit)="onSubmit(f)">
       <div class="col-md-4">
         <label>Titolo</label>
         <input id="title" type="text" [(ngModel)]="newData.title" />
@@ -106,15 +137,15 @@
       </div>
       <div class="col-md-4">
         <label>Data inizio</label>
-        <input id="datestart" type="date" [(ngModel)]="newData.datestart" />
+        <input id="datestart" type="date" [(ngModel)]="newData.dateStart" />
       </div>
       <div class="col-md-4">
         <label>Data fine</label>
-        <input type="date" id="dateend" [(ngModel)]="newData.dateend" />
+        <input type="date" id="dateend" [(ngModel)]="newData.dateEnd" />
       </div>
       <div class="col-md-4 buttonModal">
-        <button (click)="AddProject()" class="btn btn-fill btn-defaultv">
-          Aggiungi Riga
+        <button (click)="EditProject()" class="btn btn-fill btn-defaultv">
+          Aggiorna Progetto
         </button>
         <button (click)="back()" class="btn btn-fill btn-default">
           Annulla
@@ -124,6 +155,7 @@
     </div>
   </div>
 </div>
+
 
 
 

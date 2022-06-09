@@ -14,12 +14,12 @@ export class Week {
   
 export class Data {
     isChecked: boolean;
-    rif: number;
+    id: string;
     title: string;
     revenue: number;
     progessperc: number;
-    datestart: string;
-    dateend: string;
+    dateStart: Date;
+    dateEnd: Date;
     weeks: Week[];
   
     constructor() {
