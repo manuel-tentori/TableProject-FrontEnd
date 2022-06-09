@@ -11,6 +11,7 @@ import DataJson from "../data.json";
 import { map } from "rxjs/operators";
 import axios, { Axios } from "axios";
 import { parse } from "url";
+import { ObserversModule } from "@angular/cdk/observers";
 
 declare var $: any;
 
@@ -28,18 +29,23 @@ export class ProgettiComponent implements OnInit {
   public flagApertaEditProject = false;
   public showMyContainer: boolean = false;
   public newData: Data = new Data();
-
+public MaxWeeksProject: Data;
   public datas: any = [];
+  public ready= false;
+
+  public WeekHeader: any = [];
+
 
   //public datas: any = DataJson;
   isChecked: boolean;
   isMasterSel: any;
 
   loadProjects() {
-    axios.get("http://localhost:8080/api/v1/table/").then((response) => {
-      console.log(response.data);
-      this.datas = response.data;
-    });
+    var Observable = Observable.create((observer) => {
+      axios.get("http://localhost:8080/api/v1/table/").then((response) => {
+      observer.next(response.data);
+      observer.complete();   
+    })});
   }
 
   constructor(
@@ -49,12 +55,31 @@ export class ProgettiComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    var Observable = Observable.create((observer) => {
+      axios.get("http://localhost:8080/api/v1/table/").then((response) => {
+      observer.next(response.data);
+      observer.complete();   
+    })});
+   let subscription = Observable.subscribe({
+     next: data => console.log('[data] => ', data)
+   });
+
     $("#perc").keyup(function () {
       var value = $(this).val();
     });
 
-    //this.getFriends();
-    this.loadProjects();
+  }
+
+  public trovaMaxSett() {
+    let max = 0;
+    this.datas.forEach(project => {
+    if (project.weeks.lenght > max) {
+      max = project.weeks.lenght;
+      this.MaxWeeksProject = project;
+      this.ready=true;
+    }
+  });
+  console.log(this.MaxWeeksProject);
   }
 
   AllCheckFalse() {
@@ -85,6 +110,7 @@ export class ProgettiComponent implements OnInit {
         w.ProgressPercWeek = null;
         w.PartialRevenue = null;
         this.datas[k].weeks.push(w);
+        this.trovaMaxSett();
       }
     }
     this.AllCheckFalse();
@@ -111,10 +137,12 @@ export class ProgettiComponent implements OnInit {
     for (let k = 0; k < this.datas.length; k++) {
       if (this.datas[k].isChecked == true) {
         axios
-          .delete("http://localhost:8080/api/v1/table/0")
+          .delete("http://localhost:8080/api/v1/table/")
           .then((response) => {
             console.log(response);
           });
+          this.notification.open("Progetto eliminato con successo", 2);
+      }else {
         this.notification.open("Non è stato selezionato nessun progetto", 2);
       }
     }
