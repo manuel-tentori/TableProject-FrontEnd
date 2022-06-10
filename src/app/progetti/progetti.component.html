@@ -42,12 +42,22 @@
                 </tbody>
               </table> 
 
-
-              <div  *ngIf="ready" >
-            <div *ngFor="let w of MaxWeeksProject.weeks; let i=index">
+              <div class="weeks-content">
+              <div class="container-weeks-table" *ngIf="ready; let i=index" >
+            <div class="table-weeks" *ngFor="let w of MaxWeeksProject.weeks; let i=index">
                 <tr>
-                  <th>Settimana {{ i + 1 }}</th>
-                  <th>{{ Sum() }}</th>
+                  <th>Settimana {{ i+1 }}</th>
+                  <th> Sum(w) </th>
+                </tr>
+                <tr>
+                  <td>
+                    <input type="number" value="" [(ngModel)]="w.ProgressPercWeek"
+                      class="perc" max=100 min=0 />
+                  </td>
+                  <td class="revenue-week">
+                    {{ PartialRevenue() }}
+                  </td>
+                  <hr/>
                 </tr>
               </div>
             </div>

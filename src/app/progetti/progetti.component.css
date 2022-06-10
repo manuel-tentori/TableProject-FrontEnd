@@ -100,7 +100,7 @@
   
   .table-data {
     border-collapse: separate;
-    border-spacing: 30px 10px;
+    border-spacing: 30px 20px;
     width: 60%;
     margin-right: -30px;
   }
@@ -122,11 +122,15 @@ display: flex;
 }
   
   .table-data thead {
-    font-size: 15px;
+    font-size: 16px;
   }
   
+  th {
+    font-size: 16px;
+  }
+
   .table-data tbody {
-    font-size: 13px;
+    font-size: 14px;
   }
   
   .table-weeks {
@@ -165,6 +169,7 @@ display: flex;
     overflow-x: scroll;
     white-space: nowrap;
     z-index: 2;
+    margin-top: 10px;
   }
   
   .div-table-column-din {
