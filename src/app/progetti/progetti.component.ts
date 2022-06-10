@@ -29,57 +29,56 @@ export class ProgettiComponent implements OnInit {
   public flagApertaEditProject = false;
   public showMyContainer: boolean = false;
   public newData: Data = new Data();
-public MaxWeeksProject: Data;
+  public MaxWeeksProject: Data;
   public datas: any = [];
-  public ready= false;
+  public ready = false;
 
   public WeekHeader: any = [];
-
 
   //public datas: any = DataJson;
   isChecked: boolean;
   isMasterSel: any;
 
   loadProjects() {
-    var Observable = Observable.create((observer) => {
-      axios.get("http://localhost:8080/api/v1/table/").then((response) => {
-      observer.next(response.data);
-      observer.complete();   
-    })});
+    return axios.get("http://localhost:8080/api/v1/table/");
   }
 
   constructor(
     private _data: DataService,
     private httpClient: HttpClient,
     private notification: NotificationService
-  ) {}
+  ) {
+    this.loadProjects();
+  }
 
   ngOnInit() {
-    var Observable = Observable.create((observer) => {
-      axios.get("http://localhost:8080/api/v1/table/").then((response) => {
-      observer.next(response.data);
-      observer.complete();   
-    })});
-   let subscription = Observable.subscribe({
-     next: data => console.log('[data] => ', data)
-   });
+    Promise.all([this.loadProjects()]).then((response) => {
+    response[0].data.forEach(element => {
+        this.datas.push(element);
+      });;
+    }).then( ()=> (this.trovaMaxSett()));
 
     $("#perc").keyup(function () {
       var value = $(this).val();
     });
-
   }
 
   public trovaMaxSett() {
-    let max = 0;
-    this.datas.forEach(project => {
+let promise = new Promise(function(resolve, reject){
+  let max = 0;
+  this.datas.forEach((project) => {
     if (project.weeks.lenght > max) {
       max = project.weeks.lenght;
       this.MaxWeeksProject = project;
-      this.ready=true;
+      resolve(true);
     }
   });
-  console.log(this.MaxWeeksProject);
+});
+  promise.then( (result)=> {
+    if(result)
+    this.ready=true;
+  })
+    console.log(this.MaxWeeksProject);
   }
 
   AllCheckFalse() {
@@ -130,19 +129,16 @@ public MaxWeeksProject: Data;
 
     this.flagApertaAddProject = false;
     this.AllCheckFalse();
-
   }
 
   DeleteProject() {
     for (let k = 0; k < this.datas.length; k++) {
       if (this.datas[k].isChecked == true) {
-        axios
-          .delete("http://localhost:8080/api/v1/table/")
-          .then((response) => {
-            console.log(response);
-          });
-          this.notification.open("Progetto eliminato con successo", 2);
-      }else {
+        axios.delete("http://localhost:8080/api/v1/table/").then((response) => {
+          console.log(response);
+        });
+        this.notification.open("Progetto eliminato con successo", 2);
+      } else {
         this.notification.open("Non è stato selezionato nessun progetto", 2);
       }
     }
@@ -184,10 +180,9 @@ public MaxWeeksProject: Data;
     for (let k = 0; k < this.datas.length; k++) {
       if (this.datas[k].isChecked == true) {
         this.flagApertaAddProject = true;
-      } else if( this.datas.isChecked == true ) {
+      } else if (this.datas.isChecked == true) {
         this.notification.open("Selezionare solo un progetto", 2);
-      }
-      else{
+      } else {
         this.notification.open("Non è stato selezionato nessun progetto", 2);
       }
     }
