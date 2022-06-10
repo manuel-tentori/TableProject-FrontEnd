@@ -1,17 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { FormsModule, NgForm } from "@angular/forms";
-import { Custom } from "../template";
 import { NotificationService } from "../notification.service";
 import { DataService } from "../data.service";
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
-import { catchError, retry } from "rxjs/operators";
 import { Week, Data } from "../template";
-import { Observable, throwError } from "rxjs";
-import DataJson from "../data.json";
-import { map } from "rxjs/operators";
-import axios, { Axios } from "axios";
-import { parse } from "url";
-import { ObserversModule } from "@angular/cdk/observers";
+import axios from "axios";
+
 
 declare var $: any;
 
@@ -29,9 +23,9 @@ export class ProgettiComponent implements OnInit {
   public flagApertaEditProject = false;
   public showMyContainer: boolean = false;
   public newData: Data = new Data();
-public MaxWeeksProject: Data;
+  public MaxWeeksProject: Data;
   public datas: any = [];
-  public ready= false;
+  public ready = false;
 
   public WeekHeader: any = [];
 
@@ -42,44 +36,47 @@ public MaxWeeksProject: Data;
 
   loadProjects() {
     var Observable = Observable.create((observer) => {
-      axios.get("http://localhost:8080/api/v1/table/").then((response) => {
-      observer.next(response.data);
-      observer.complete();   
-    })});
+      axios.get("http://192.168.1.128:8080/api/v1/table").then((response) => {
+        observer.next(response.data);
+        observer.complete();
+      })
+    });
   }
 
   constructor(
     private _data: DataService,
     private httpClient: HttpClient,
     private notification: NotificationService
-  ) {}
+  ) {
+
+  }
+
+  async getData() {
+    const res = await axios.get("http://192.168.1.128:8080/api/v1/table");
+    return await res.data;
+  }
 
   ngOnInit() {
-    var Observable = Observable.create((observer) => {
-      axios.get("http://localhost:8080/api/v1/table/").then((response) => {
-      observer.next(response.data);
-      observer.complete();   
-    })});
-   let subscription = Observable.subscribe({
-     next: data => console.log('[data] => ', data)
-   });
-
+    this.getData().then((data) => {
+      this.datas = data;
+      this.trovaMaxSett();
+    });
     $("#perc").keyup(function () {
       var value = $(this).val();
     });
 
   }
-
+ 
   public trovaMaxSett() {
     let max = 0;
     this.datas.forEach(project => {
-    if (project.weeks.lenght > max) {
-      max = project.weeks.lenght;
-      this.MaxWeeksProject = project;
-      this.ready=true;
-    }
-  });
-  console.log(this.MaxWeeksProject);
+      if ([...project.weeks].length > max) {
+        max = project.weeks.lenght;
+        this.MaxWeeksProject = project;
+        this.ready = true;
+      }
+      console.log(this.MaxWeeksProject)
+    });
   }
 
   AllCheckFalse() {
@@ -141,8 +138,8 @@ public MaxWeeksProject: Data;
           .then((response) => {
             console.log(response);
           });
-          this.notification.open("Progetto eliminato con successo", 2);
-      }else {
+        this.notification.open("Progetto eliminato con successo", 2);
+      } else {
         this.notification.open("Non è stato selezionato nessun progetto", 2);
       }
     }
@@ -184,10 +181,10 @@ public MaxWeeksProject: Data;
     for (let k = 0; k < this.datas.length; k++) {
       if (this.datas[k].isChecked == true) {
         this.flagApertaAddProject = true;
-      } else if( this.datas.isChecked == true ) {
+      } else if (this.datas.isChecked == true) {
         this.notification.open("Selezionare solo un progetto", 2);
       }
-      else{
+      else {
         this.notification.open("Non è stato selezionato nessun progetto", 2);
       }
     }
