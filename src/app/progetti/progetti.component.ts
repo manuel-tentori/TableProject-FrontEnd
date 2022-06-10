@@ -130,17 +130,11 @@ export class ProgettiComponent implements OnInit {
   DeleteProject() {
     for (let k = 0; k < this.datas.length; k++) {
       if (this.datas[k].isChecked == true) {
-<<<<<<< HEAD
         axios
           .delete("http://localhost:8080/api/v1/table/")
           .then((response) => {
             console.log(response);
           });
-=======
-        axios.delete("http://localhost:8080/api/v1/table/").then((response) => {
-          console.log(response);
-        });
->>>>>>> 050a25a5922db48cca78bcbb228805f6a5f555b2
         this.notification.open("Progetto eliminato con successo", 2);
       } else {
         this.notification.open("Non è stato selezionato nessun progetto", 2);
@@ -186,12 +180,8 @@ export class ProgettiComponent implements OnInit {
         this.flagApertaAddProject = true;
       } else if (this.datas.isChecked == true) {
         this.notification.open("Selezionare solo un progetto", 2);
-<<<<<<< HEAD
       }
       else {
-=======
-      } else {
->>>>>>> 050a25a5922db48cca78bcbb228805f6a5f555b2
         this.notification.open("Non è stato selezionato nessun progetto", 2);
       }
     }
