@@ -33,15 +33,6 @@ export class ProgettiComponent implements OnInit {
   isChecked: boolean;
   isMasterSel: any;
 
-  loadProjects() {
-    var Observable = Observable.create((observer) => {
-      axios.get("http://192.168.1.128:8080/api/v1/table").then((response) => {
-        observer.next(response.data);
-        observer.complete();
-      })
-    });
-  }
-
   constructor(
     private _data: DataService,
     private httpClient: HttpClient,
