@@ -7,7 +7,6 @@ import { Week, Data, DataForm } from "../template";
 import axios from "axios";
 import { NgbDateParserFormatter } from "@ng-bootstrap/ng-bootstrap";
 
-
 declare var $: any;
 
 @Component({
@@ -23,7 +22,7 @@ export class ProgettiComponent implements OnInit {
   public flagApertaAddProject = false;
   public flagApertaEditProject = false;
   public showMyContainer: boolean = false;
-  public newData: DataForm[] = [];
+  public newData : Data = new Data();  
   public MaxWeeksProject: Data;
   public datas: any = [];
   public ready = false;
@@ -38,9 +37,7 @@ export class ProgettiComponent implements OnInit {
     private _data: DataService,
     private httpClient: HttpClient,
     private notification: NotificationService
-  ) {
-
-  }
+  ) {}
 
   async getData() {
     const res = await axios.get("http://localhost:8080/api/v1/table");
@@ -50,25 +47,24 @@ export class ProgettiComponent implements OnInit {
   ngOnInit() {
     this.getData().then((data) => {
       this.datas = data;
+      this.rif();
       this.trovaMaxSett();
     });
-
-    this.rif();
 
     $("#perc").keyup(function () {
       var value = $(this).val();
     });
   }
- 
+
   public trovaMaxSett() {
     let max = 0;
-    this.datas.forEach(project => {
+    this.datas.forEach((project) => {
       if ([...project.weeks].length > max) {
         max = project.weeks.lenght;
         this.MaxWeeksProject = project;
         this.ready = true;
       }
-      console.log(this.MaxWeeksProject)
+      console.log(this.MaxWeeksProject);
     });
   }
 
@@ -80,6 +76,7 @@ export class ProgettiComponent implements OnInit {
   }
 
   selectAll() {
+    this.selectedAll = true;
     for (var i = 0; i < this.datas.length; i++) {
       this.datas[i].isChecked = this.selectedAll;
     }
@@ -105,16 +102,18 @@ export class ProgettiComponent implements OnInit {
     }
     this.AllCheckFalse();
 
-    for (let k = 0; k < this.datas.length; k++) {
-      if (this.datas[k].isChecked == false) {
-        this.notification.open("Non è stato selezionato nessun progetto", 2);
-      }
-    }
+    // for (let k = 0; k < this.datas.length; k++) {
+    //   if (this.datas[k].isChecked == false) {
+    //     this.notification.open("Non è stato selezionato nessun progetto", 2);
+    //   }
+    // }
   }
 
   rif() {
     for (let k = 0; k < this.datas.length; k++) {
-      this.datas.rif = this.datas[k];
+      this.datas[k].rif = k + 1;
+      this.datas[k].push;
+      console.log(k);
     }
   }
 
@@ -123,12 +122,12 @@ export class ProgettiComponent implements OnInit {
       if (this.datas[k].isChecked == true) {
         console.log(this.datas[k].id);
         axios
-          .delete("http://localhost:8080/api/v1/table/"+(this.datas[k].id))
+          .delete("http://localhost:8080/api/v1/table/" + this.datas[k].id)
           .then(() => {
             this.notification.open("Progetto eliminato con successo", 2);
           });
 
-          this.ngOnInit();
+        this.ngOnInit();
       } else {
         //this.notification.open("Non è stato selezionato nessun progetto", 2);
       }
@@ -143,14 +142,13 @@ export class ProgettiComponent implements OnInit {
       if (this.datas[k].isChecked == true) {
         console.log(this.datas[k].id);
         axios
-          .delete("http://localhost:8080/api/v1/table/"+(this.datas[k].id))
+          .delete("http://localhost:8080/api/v1/table/" + this.datas[k].id)
           .then(() => {
-            this.notification.open("Progetto eliminato con successo", 2);
+            this.notification.open("Progetto eliminato con successo", 0.3);
             this.ngOnInit();
           });
-    
 
-          this.ngOnInit();
+        this.ngOnInit();
       } else {
         //this.notification.open("Non è stato selezionato nessun progetto", 2);
       }
@@ -194,10 +192,9 @@ export class ProgettiComponent implements OnInit {
       if (this.datas[k].isChecked == true) {
         this.flagApertaAddProject = true;
       } else if (this.datas.isChecked == true) {
-        this.notification.open("Selezionare solo un progetto", 2);
-      }
-      else {
-       // this.notification.open("Non è stato selezionato nessun progetto", 2);
+        this.notification.open("Selezionare solo un progetto", 1);
+      } else {
+        // this.notification.open("Non è stato selezionato nessun progetto", 2);
       }
     }
   }
@@ -208,49 +205,23 @@ export class ProgettiComponent implements OnInit {
     this.flagApertaEditProject = false;
   }
 
-//   AddProject() {
-//     const DataClone = Object.assign([], this.newData);
-//     DataClone.progessperc = 0;
-//     let w = new Week();
-//     w.ProgressPercWeek = 0;
-//     w.PartialRevenue = 0;
-//     this.newData.weeks.push(w);
-//     this.newData.title;
-//     this.datas.push(DataClone);
-// console.log(this.newData);
-//     this.flagApertaAddProject = false;  
+    AddProject() {
+      // console.log(this.newData);
+      // this.flagApertaAddProject = false;
+      // axios({
+      //   method: 'post',
+      //   url: 'http://localhost:8080/api/v1/table',
+      //   data: {
+      //     title: this.newData,
+      //   }
+      // });
+      // this.flagApertaAddProject = false;
+      // this.ngOnInit();
+    }
 
-//     axios({
-//       method: 'post',
-//       url: 'http://localhost:8080/api/v1/table',
-//       data: {
-//         title: this.newData.title,
-//       }    
-//     });
 
-//     this.ngOnInit();
-//   }
-
-  data(f:NgForm) {
-    console.log(f.value);
-    this.newData.push(f.value);
-    console.log(this.newData);
-    const d = new Data();
-    d.title = "Progeto 6";
-this.newData.push(d);
-        axios({
-      method: 'post',
-      url: 'http://localhost:8080/api/v1/table',
-      data: this.newData,
-    });
-    this.flagApertaAddProject = false;
 
   }
-
-}
-
-
-
 
 function isChecked(name: void, string: any, isChecked: any, boolean: any) {
   throw new Error("Function not implemented.");

@@ -16,16 +16,16 @@
               </div>
             <div class="div-table-content">
 
-              <table id="example" class="table-data">
+              <table mate id="example" class="table-data">
                 <thead>
                   <tr>
                     <th><mat-checkbox [(ngModel)]="selectedAll" (change)="selectAll()"></mat-checkbox></th>
-                    <th>Rif.</th>
-                    <th>Titolo</th>
-                    <th>Revenue</th>
-                    <th>Perc. Completamento</th>
-                    <th>Data inizio</th>
-                    <th>Data fine</th>
+                    <th scope="col" [appSort]="datas" data-order="desc" data-name="rif"><a href="#" class="sort-by">Rif.</a></th>
+                    <th scope="col" [appSort]="datas" data-order="desc" data-name="title"><a href="#" class="sort-by">Titolo</a></th>
+                    <th scope="col" [appSort]="datas" data-order="desc" data-name="revenue"><a href="#" class="sort-by">Revenue</a></th>
+                    <th scope="col" [appSort]="datas" data-order="desc" data-name="perccomp"><a href="#" class="sort-by">Perc. Completamento</a></th>
+                    <th scope="col" [appSort]="datas" data-order="desc" data-name="dateStart"><a href="#" class="sort-by">Data inizio</a></th>
+                    <th scope="col" [appSort]="datas" data-order="desc" data-name="dateEnd"><a href="#" class="sort-by">Data fine</a></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -105,25 +105,25 @@
   <div class="card card1 cooplatModal">
     <div class="card-header"></div>
     <div class="card-content">
-      <form #f="ngForm" (ngSubmit)="data(f)">
+      <form (ngSubmit)="AddProject()">
       <div class="col-md-4">
         <label>Titolo</label>
-        <input type="text" ngModel name="title" name="title" id="title" />
+        <input type="text" [(ngModel)]="newData.title" />
       </div>
       <div class="col-md-4">
         <label>Revenue</label>
-        <input type="number" ngModel name="revenue" name="revenue" id="revenue" />
+        <input type="number" [(ngModel)]="newData.revenue" />
       </div>
       <div class="col-md-4">
         <label>Data inizio</label>
-        <input type="date" ngModel name="dateStart" name="dateStart" id="titdateStartle" />
+        <input type="date" ngModel [(ngModel)]="newData.dateStart" />
       </div>
       <div class="col-md-4">
         <label>Data fine</label>
-        <input type="date" ngModel name="dateEnd" name="dateEnd" id="dateEnd" />
+        <input type="date" ngModel [(ngModel)]="newData.dateEnd" />
       </div>
       <div class="col-md-4 buttonModal">
-        <button class="btn btn-fill btn-defaultv">
+        <button type="submit" class="btn btn-fill btn-defaultv">
           Aggiungi Progetto
         </button>
         <button (click)="back()" class="btn btn-fill btn-default">
