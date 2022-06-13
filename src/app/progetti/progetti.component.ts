@@ -22,12 +22,12 @@ export class ProgettiComponent implements OnInit {
   public flagApertaAddProject = false;
   public flagApertaEditProject = false;
   public showMyContainer: boolean = false;
-  public newData : Data = new Data();  
+  public newData = new Data();
   public MaxWeeksProject: Data;
   public datas: any = [];
   public ready = false;
-
   public WeekHeader: any = [];
+  submitted = false;
 
   //public datas: any = DataJson;
   isChecked: boolean;
@@ -38,11 +38,6 @@ export class ProgettiComponent implements OnInit {
     private httpClient: HttpClient,
     private notification: NotificationService
   ) {}
-
-  async getData() {
-    const res = await axios.get("http://localhost:8080/api/v1/table");
-    return await res.data;
-  }
 
   ngOnInit() {
     this.getData().then((data) => {
@@ -56,16 +51,9 @@ export class ProgettiComponent implements OnInit {
     });
   }
 
-  public trovaMaxSett() {
-    let max = 0;
-    this.datas.forEach((project) => {
-      if ([...project.weeks].length > max) {
-        max = project.weeks.lenght;
-        this.MaxWeeksProject = project;
-        this.ready = true;
-      }
-      console.log(this.MaxWeeksProject);
-    });
+  async getData() {
+    const res = await axios.get("http://localhost:8080/api/v1/table");
+    return await res.data;
   }
 
   AllCheckFalse() {
@@ -88,6 +76,75 @@ export class ProgettiComponent implements OnInit {
     });
   }
 
+  rif() {
+    for (let k = 0; k < this.datas.length; k++) {
+      this.datas[k].rif = k + 1;
+      this.datas[k].push;
+      console.log(k);
+    }
+  }
+
+  Sum(d: Data): number {
+    let sum = 0;
+    d.weeks.forEach((w) => {
+      sum += w.PartialRevenue;
+    });
+
+    return sum;
+  }
+
+  ProgressPerc(d: Data): number {
+    let sum = 0;
+    d.weeks.forEach((w) => {
+      sum += w.ProgressPercWeek;
+    });
+
+    return sum;
+  }
+
+  PartialRevenue(d: Data): number {
+    let partial;
+    d.weeks.forEach((w) => {
+      partial = (d.revenue / 100) * w.ProgressPercWeek;
+    });
+
+    return partial;
+  }
+
+  back() {
+    this.flagAperta = false;
+    this.flagApertaAddProject = false;
+    this.flagApertaEditProject = false;
+  }
+
+  OpenAddProject() {
+    this.flagApertaAddProject = true;
+  }
+
+  OpenEditProject() {
+    for (let k = 0; k < this.datas.length; k++) {
+      if (this.datas[k].isChecked == true) {
+        this.flagApertaAddProject = true;
+      } else if (this.datas.isChecked == true) {
+        this.notification.open("Selezionare solo un progetto", 1);
+      } else {
+        // this.notification.open("Non è stato selezionato nessun progetto", 2);
+      }
+    }
+  }
+
+  public trovaMaxSett() {
+    let max = 0;
+    this.datas.forEach((project) => {
+      if ([...project.weeks].length > max) {
+        max = project.weeks.lenght;
+        this.MaxWeeksProject = project;
+        this.ready = true;
+      }
+      console.log(this.MaxWeeksProject);
+    });
+  }
+
   AddWeek() {
     for (let k = 0; k < this.datas.length; k++) {
       if (this.datas[k].isChecked == true) {
@@ -101,20 +158,6 @@ export class ProgettiComponent implements OnInit {
       }
     }
     this.AllCheckFalse();
-
-    // for (let k = 0; k < this.datas.length; k++) {
-    //   if (this.datas[k].isChecked == false) {
-    //     this.notification.open("Non è stato selezionato nessun progetto", 2);
-    //   }
-    // }
-  }
-
-  rif() {
-    for (let k = 0; k < this.datas.length; k++) {
-      this.datas[k].rif = k + 1;
-      this.datas[k].push;
-      console.log(k);
-    }
   }
 
   EditProject() {
@@ -156,72 +199,27 @@ export class ProgettiComponent implements OnInit {
     this.AllCheckFalse();
   }
 
-  Sum(d: Data): number {
-    let sum = 0;
-    d.weeks.forEach((w) => {
-      sum += w.PartialRevenue;
-    });
-
-    return sum;
+  AddProject() {
+    // console.log(this.newData);
+    // this.flagApertaAddProject = false;
+    // axios({
+    //   method: 'post',
+    //   url: 'http://localhost:8080/api/v1/table',
+    //   data: {
+    //     title: this.newData,
+    //   }
+    // });
+    // this.flagApertaAddProject = false;
+    // this.ngOnInit();
   }
 
-  ProgressPerc(d: Data): number {
-    let sum = 0;
-    d.weeks.forEach((w) => {
-      sum += w.ProgressPercWeek;
-    });
-
-    return sum;
+  onSubmit() {
+    this.submitted = true;
+    console.log(this.newData);
+    console.log(this.newData.title);
+    console.log(this.newData.revenue);
   }
-
-  PartialRevenue(d: Data): number {
-    let partial;
-    d.weeks.forEach((w) => {
-      partial = (d.revenue / 100) * w.ProgressPercWeek;
-    });
-
-    return partial;
-  }
-
-  OpenAddProject() {
-    this.flagApertaAddProject = true;
-  }
-
-  OpenEditProject() {
-    for (let k = 0; k < this.datas.length; k++) {
-      if (this.datas[k].isChecked == true) {
-        this.flagApertaAddProject = true;
-      } else if (this.datas.isChecked == true) {
-        this.notification.open("Selezionare solo un progetto", 1);
-      } else {
-        // this.notification.open("Non è stato selezionato nessun progetto", 2);
-      }
-    }
-  }
-
-  back() {
-    this.flagAperta = false;
-    this.flagApertaAddProject = false;
-    this.flagApertaEditProject = false;
-  }
-
-    AddProject() {
-      // console.log(this.newData);
-      // this.flagApertaAddProject = false;
-      // axios({
-      //   method: 'post',
-      //   url: 'http://localhost:8080/api/v1/table',
-      //   data: {
-      //     title: this.newData,
-      //   }
-      // });
-      // this.flagApertaAddProject = false;
-      // this.ngOnInit();
-    }
-
-
-
-  }
+}
 
 function isChecked(name: void, string: any, isChecked: any, boolean: any) {
   throw new Error("Function not implemented.");

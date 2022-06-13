@@ -7,30 +7,40 @@
             <div class="toolbar">
               <h4 class="card-title">PROGETTI</h4>
               <button mat-icon-button (click)="OpenEditProject()" class="edit-icon">
-                <mat-icon >edit</mat-icon> 
+                <mat-icon>edit</mat-icon>
               </button>
               <button mat-icon-button (click)="DeleteProject()" class="delete-icon">
-                <mat-icon >delete</mat-icon>
+                <mat-icon>delete</mat-icon>
               </button>
-                         
-              </div>
+
+            </div>
             <div class="div-table-content">
 
               <table mate id="example" class="table-data">
                 <thead>
                   <tr>
-                    <th><mat-checkbox [(ngModel)]="selectedAll" (change)="selectAll()"></mat-checkbox></th>
-                    <th scope="col" [appSort]="datas" data-order="desc" data-name="rif"><a href="#" class="sort-by">Rif.</a></th>
-                    <th scope="col" [appSort]="datas" data-order="desc" data-name="title"><a href="#" class="sort-by">Titolo</a></th>
-                    <th scope="col" [appSort]="datas" data-order="desc" data-name="revenue"><a href="#" class="sort-by">Revenue</a></th>
-                    <th scope="col" [appSort]="datas" data-order="desc" data-name="perccomp"><a href="#" class="sort-by">Perc. Completamento</a></th>
-                    <th scope="col" [appSort]="datas" data-order="desc" data-name="dateStart"><a href="#" class="sort-by">Data inizio</a></th>
-                    <th scope="col" [appSort]="datas" data-order="desc" data-name="dateEnd"><a href="#" class="sort-by">Data fine</a></th>
+                    <th>
+                      <mat-checkbox [(ngModel)]="selectedAll" (change)="selectAll()"></mat-checkbox>
+                    </th>
+                    <th scope="col" [appSort]="datas" data-order="desc" data-name="rif"><a href="#"
+                        class="sort-by">Rif.</a></th>
+                    <th scope="col" [appSort]="datas" data-order="desc" data-name="title"><a href="#"
+                        class="sort-by">Titolo</a></th>
+                    <th scope="col" [appSort]="datas" data-order="desc" data-name="revenue"><a href="#"
+                        class="sort-by">Revenue</a></th>
+                    <th scope="col" [appSort]="datas" data-order="desc" data-name="perccomp"><a href="#"
+                        class="sort-by">Perc. Completamento</a></th>
+                    <th scope="col" [appSort]="datas" data-order="desc" data-name="dateStart"><a href="#"
+                        class="sort-by">Data inizio</a></th>
+                    <th scope="col" [appSort]="datas" data-order="desc" data-name="dateEnd"><a href="#"
+                        class="sort-by">Data fine</a></th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let d of datas; let i=index">
-                    <td><mat-checkbox  [(ngModel)]="d.isChecked" (change)="checkIfAllSelected()"></mat-checkbox></td>
+                    <td>
+                      <mat-checkbox [(ngModel)]="d.isChecked" (change)="checkIfAllSelected()"></mat-checkbox>
+                    </td>
                     <td>{{ d.rif }}</td>
                     <td>{{ d.title }}</td>
                     <td>{{ d.revenue }} €</td>
@@ -40,28 +50,28 @@
                     <hr />
                   </tr>
                 </tbody>
-              </table> 
+              </table>
 
               <div class="weeks-content">
-              <div class="container-weeks-table" *ngIf="ready; let i=index" >
-                <div class="table-weeks" *ngFor="let w of MaxWeeksProject.weeks; let i=index">
-                <tr>
-                  <th>Settimana {{ i+1 }}</th>
-                  <th> Sum </th>
-                </tr>
-                <tr>
-                  <td>
-                    <input type="number" value="w.ProgressPercWeek" [(ngModel)]="w.ProgressPercWeek"
-                      class="perc" max=100 min=0 />
-                  </td>
-                  <td class="revenue-week">
-                    {{ PartialRevenue(w) }}
-                  </td>
-                  <hr/>
-                </tr>
-              </div>
-            </div>
-  <!-- 
+                <div class="container-weeks-table" *ngIf="ready; let i=index">
+                  <div class="table-weeks" *ngFor="let w of MaxWeeksProject.weeks; let i=index">
+                    <tr>
+                      <th>Settimana {{ i+1 }}</th>
+                      <th> Sum </th>
+                    </tr>
+                    <tr>
+                      <td>
+                        <input type="number" value="w.ProgressPercWeek" [(ngModel)]="w.ProgressPercWeek" class="perc"
+                          max=100 min=0 />
+                      </td>
+                      <td class="revenue-week">
+                        {{ PartialRevenue(w) }}
+                      </td>
+                      <hr />
+                    </tr>
+                  </div>
+                </div>
+                <!-- 
                <div class="weeks-content">
                 <div class="container-weeks-table" *ngFor="let d of datas; let k = index">
                   <div id="example1" class="table-weeks" *ngFor="let w of d.weeks; let i= index">
@@ -80,98 +90,98 @@
                   </div>
                 </div>
               </div> -->
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="main-content over" *ngIf="flagAperta">
-  <div class="card cooplatModal">
-    <div class="card-header"></div>
-    <div class="card-content">
-      <div class="col-md-3">
-        <button (click)="back()" class="btn btn-fill btn-default">
-          Chiudi
-        </button>
+  <div class="main-content over" *ngIf="flagAperta">
+    <div class="card cooplatModal">
+      <div class="card-header"></div>
+      <div class="card-content">
+        <div class="col-md-3">
+          <button (click)="back()" class="btn btn-fill btn-default">
+            Chiudi
+          </button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<div class="main-content over" *ngIf="flagApertaAddProject">
-  <div class="card card1 cooplatModal">
-    <div class="card-header"></div>
-    <div class="card-content">
-      <form (ngSubmit)="AddProject()">
-      <div class="col-md-4">
-        <label>Titolo</label>
-        <input type="text" [(ngModel)]="newData.title" />
-      </div>
-      <div class="col-md-4">
-        <label>Revenue</label>
-        <input type="number" [(ngModel)]="newData.revenue" />
-      </div>
-      <div class="col-md-4">
-        <label>Data inizio</label>
-        <input type="date" ngModel [(ngModel)]="newData.dateStart" />
-      </div>
-      <div class="col-md-4">
-        <label>Data fine</label>
-        <input type="date" ngModel [(ngModel)]="newData.dateEnd" />
-      </div>
-      <div class="col-md-4 buttonModal">
-        <button type="submit" class="btn btn-fill btn-defaultv">
-          Aggiungi Progetto
-        </button>
-        <button (click)="back()" class="btn btn-fill btn-default">
-          Annulla
-        </button>
-      </div>
-      </form>
-    </div>
-  </div>
-</div>
-
-
-<div class="main-content over" *ngIf="flagApertaEditProject">
-  <div class="card card1 cooplatModal">
-    <div class="card-header"></div>
-    <div class="card-content">
-      <div class="col-md-4">
-        <label>Titolo</label>
-        <input id="title" type="text" ngModel name="title" />
-      </div>
-      <div class="col-md-4">
-        <label>Revenue</label>
-        <input id="revenue" type="number" ngModel name="title" />
-      </div>
-      <div class="col-md-4">
-        <label>Data inizio</label>
-        <input id="datestart" type="date" ngModel name="title" />
-      </div>
-      <div class="col-md-4">
-        <label>Data fine</label>
-        <input type="date" id="dateend" ngModel name="title" />
-      </div>
-      <div class="col-md-4 buttonModal">
-        <button (click)="EditProject()" class="btn btn-fill btn-defaultv">
-          Aggiorna Progetto
-        </button>
-        <button (click)="back()" class="btn btn-fill btn-default">
-          Annulla
-        </button>
+  <div class="main-content over" *ngIf="flagApertaAddProject">
+    <div class="card card1 cooplatModal">
+      <div class="card-header"></div>
+      <div class="card-content">
+        <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
+          <div class="col-md-4">
+            <label>Titolo</label>
+            <input type="text" [(ngModel)]="newData.title" />
+          </div>
+          <div class="col-md-4">
+            <label>Revenue</label>
+            <input type="number" [(ngModel)]="newData.revenue" />
+          </div>
+          <div class="col-md-4">
+            <label>Data inizio</label>
+            <input type="date" ngModel [(ngModel)]="newData.dateStart" />
+          </div>
+          <div class="col-md-4">
+            <label>Data fine</label>
+            <input type="date" ngModel [(ngModel)]="newData.dateEnd" />
+          </div>
+          <div class="col-md-4 buttonModal">
+            <button type="submit" class="btn btn-fill btn-defaultv">
+              Aggiungi Progetto
+            </button>
+            <button (click)="back()" class="btn btn-fill btn-default">
+              Annulla
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
-</div>
+
+
+  <div class="main-content over" *ngIf="flagApertaEditProject">
+    <div class="card card1 cooplatModal">
+      <div class="card-header"></div>
+      <div class="card-content">
+        <div class="col-md-4">
+          <label>Titolo</label>
+          <input id="title" type="text" ngModel name="title" />
+        </div>
+        <div class="col-md-4">
+          <label>Revenue</label>
+          <input id="revenue" type="number" ngModel name="title" />
+        </div>
+        <div class="col-md-4">
+          <label>Data inizio</label>
+          <input id="datestart" type="date" ngModel name="title" />
+        </div>
+        <div class="col-md-4">
+          <label>Data fine</label>
+          <input type="date" id="dateend" ngModel name="title" />
+        </div>
+        <div class="col-md-4 buttonModal">
+          <button (click)="EditProject()" class="btn btn-fill btn-defaultv">
+            Aggiorna Progetto
+          </button>
+          <button (click)="back()" class="btn btn-fill btn-default">
+            Annulla
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
 
 
-<div class="dropup-content">
-  <button class="button buttonAddProject" (click)="OpenAddProject()">+</button>
-  <button class="button buttonAddWeek" (click)="AddWeek()">+</button>
-</div>
+  <div class="dropup-content">
+    <button class="button buttonAddProject" (click)="OpenAddProject()">+</button>
+    <button class="button buttonAddWeek" (click)="AddWeek()">+</button>
+  </div>
