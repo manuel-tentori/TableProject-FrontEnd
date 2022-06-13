@@ -7,13 +7,14 @@ export class Custom {
 }
 
 export class Week {
-    id: number;
+    id: string;
     ProgressPercWeek: number;
     PartialRevenue: number;
   }
   
 export class Data {
     isChecked: boolean;
+    rif: string;
     id: string;
     title: string;
     revenue: number;
@@ -27,3 +28,10 @@ export class Data {
     }
   }
 
+  export interface DataForm {
+    title: string;
+    revenue: number;
+    dateStart: Date;
+    dateEnd: Date;
+  
+  }
