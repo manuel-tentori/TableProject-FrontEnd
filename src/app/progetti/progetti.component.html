@@ -52,6 +52,7 @@
                 </tbody>
               </table>
 
+<<<<<<< HEAD
               <div class="weeks-content">
                 <div class="container-weeks-table" *ngIf="ready; let i=index">
                   <div class="table-weeks" *ngFor="let w of MaxWeeksProject.weeks; let i=index">
@@ -72,6 +73,18 @@
                   </div>
                 </div>
                 <!-- 
+=======
+
+              <div  *ngIf="ready" >
+            <div *ngFor="let w of MaxWeeksProject.weeks; let i=index">
+                <tr>
+                  <th>Settimana {{ i + 1 }}</th>
+                  <th>{{ Sum() }}</th>
+                </tr>
+              </div>
+            </div>
+  <!-- 
+>>>>>>> parent of 55a1202 (commit)
                <div class="weeks-content">
                 <div class="container-weeks-table" *ngFor="let d of datas; let k = index">
                   <div id="example1" class="table-weeks" *ngFor="let w of d.weeks; let i= index">
