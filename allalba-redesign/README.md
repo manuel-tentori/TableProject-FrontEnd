@@ -41,11 +41,16 @@ Per usare le foto reali del sito attuale è sufficiente copiarle nella cartella
 
 ## Logo
 
-Nel design è integrato un marchio SVG coerente con il brand ("sole all'alba
-sull'acqua termale") usato in header, hero, footer e favicon. Per usare il
-**logo ufficiale** dell'hotel è sufficiente salvarlo come `img/logo.png`
-(preferibilmente su sfondo trasparente): la pagina lo rileva automaticamente
-e lo sostituisce al marchio SVG in header e footer, senza toccare il codice.
+Il design segue l'identità visiva ufficiale dell'hotel: il marchio del cuore
+formato dagli zampilli d'acqua termale è ricreato in SVG (bianco sui fondi
+scuri, petrolio sull'header chiaro) e usato in header, hero, footer e favicon,
+con il wordmark nella gerarchia originale "Hotel Terme / ALL'ALBA / Abano
+Terme" e l'oro champagne del sito attuale come colore d'accento.
+
+Per usare il **file del logo ufficiale** al posto della ricostruzione SVG è
+sufficiente salvarlo come `img/logo.png` (preferibilmente su sfondo
+trasparente): la pagina lo rileva automaticamente e lo sostituisce in header
+e footer, senza toccare il codice.
 
 ## Contenuti
 
