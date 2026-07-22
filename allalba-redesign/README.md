@@ -39,6 +39,14 @@ Per usare le foto reali del sito attuale è sufficiente copiarle nella cartella
 | `img/piscina-termale-interna.jpg` | Piscina termale interna |
 | `img/ristorante-sala.jpg` | Sala ristorante |
 
+## Logo
+
+Nel design è integrato un marchio SVG coerente con il brand ("sole all'alba
+sull'acqua termale") usato in header, hero, footer e favicon. Per usare il
+**logo ufficiale** dell'hotel è sufficiente salvarlo come `img/logo.png`
+(preferibilmente su sfondo trasparente): la pagina lo rileva automaticamente
+e lo sostituisce al marchio SVG in header e footer, senza toccare il codice.
+
 ## Contenuti
 
 Testi e informazioni (camere, terme, ristorante, offerte, contatti) provengono

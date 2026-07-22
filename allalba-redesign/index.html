@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Hotel Terme All'Alba — SPA Hotel 4 stelle ad Abano Terme</title>
 <meta name="description" content="Hotel Terme All'Alba: hotel 4 stelle con piscine termali e SPA nel centro di Abano Terme. Fango termale, camere superior e suite, ristorante e offerte benessere.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 72 56'%3E%3Cpath d='M20 34a16 16 0 0 1 32 0Z' fill='%23d3a55c'/%3E%3Cg stroke='%23d3a55c' stroke-width='2.6' stroke-linecap='round'%3E%3Cpath d='M36 7v6M17 14l4 4M55 14l-4 4M10 28h6M56 28h6'/%3E%3C/g%3E%3Cpath d='M10 41q6-5 13 0t13 0 13 0 13 0' stroke='%235fb0bd' stroke-width='3' fill='none' stroke-linecap='round'/%3E%3Cpath d='M17 49q6-5 13 0t13 0 12 0' stroke='%235fb0bd' stroke-width='3' fill='none' stroke-linecap='round' opacity='.55'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -56,11 +57,17 @@ section{padding:96px 0}
 header{position:fixed;inset:0 0 auto 0;z-index:100;transition:.35s;padding:18px 0}
 header .container{display:flex;align-items:center;justify-content:space-between;gap:20px}
 header.solid{background:rgba(255,255,255,.96);backdrop-filter:blur(12px);box-shadow:0 6px 24px rgba(11,42,51,.08);padding:10px 0}
-.logo{display:flex;flex-direction:column;line-height:1;color:#fff;transition:.3s}
+.logo{display:flex;align-items:center;gap:13px;line-height:1;color:#fff;transition:.3s}
+.logo-testo{display:flex;flex-direction:column}
 .logo .nome{font-family:var(--serif);font-size:1.7rem;font-weight:700;letter-spacing:.02em}
 .logo .sotto{font-size:.62rem;letter-spacing:.42em;text-transform:uppercase;margin-top:5px;opacity:.85}
-.logo .stelle{color:var(--alba-chiaro);font-size:.8rem;letter-spacing:.28em}
+.logo .stelle{color:var(--alba-chiaro);font-size:.72rem;letter-spacing:.28em;margin-bottom:4px}
+.logo .marchio{width:46px;height:auto;flex:0 0 auto}
+.logo .marchio-img{width:auto;height:52px;display:none}
+body.logo-ufficiale .logo .marchio{display:none}
+body.logo-ufficiale .logo .marchio-img{display:block}
 header.solid .logo{color:var(--terme)}
+.hero-marchio{width:96px;height:auto;margin:0 auto 20px;display:block;filter:drop-shadow(0 4px 18px rgba(232,201,139,.35))}
 nav.desktop{display:flex;gap:30px;align-items:center}
 nav.desktop a{color:#fff;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;position:relative;padding:6px 0}
 nav.desktop a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--alba);transition:.3s}
@@ -120,6 +127,8 @@ body.menu-aperto .menu-mobile{opacity:1;pointer-events:auto}
 .foto .tag{margin:14px;background:rgba(11,42,51,.6);backdrop-filter:blur(6px);color:#fff;font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;padding:7px 14px;border-radius:999px}
 .f-hotel{background-image:url('img/hotel-esterno.jpg'),linear-gradient(150deg,#2e7787,#123b46)}
 .f-parco{background-image:url('img/parco-giardino.jpg'),linear-gradient(150deg,#6f9a6d,#2c5a48)}
+.benvenuto{margin:26px 0 4px;padding:18px 24px;border-left:2px solid var(--alba);background:var(--sabbia-scura);border-radius:0 var(--raggio) var(--raggio) 0;font-family:var(--serif);font-size:1.12rem;font-style:italic;color:var(--terme)}
+.benvenuto cite{display:block;margin-top:8px;font-family:var(--sans);font-style:normal;font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:var(--alba)}
 .punti{display:grid;gap:16px;margin-top:30px}
 .punto{display:flex;gap:15px;align-items:flex-start}
 .punto .ico{flex:0 0 44px;height:44px;border-radius:50%;background:var(--sabbia-scura);display:grid;place-items:center;color:var(--alba);font-size:1.1rem}
@@ -261,13 +270,35 @@ footer .logo{color:#fff}
 </head>
 <body>
 
+<!-- Marchio "sole all'alba sull'acqua termale" — sostituito automaticamente
+     dal logo ufficiale se presente in img/logo.png (vedi script in fondo) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="oro-alba" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e8c98b"/><stop offset="1" stop-color="#c99a4b"/>
+    </linearGradient>
+    <symbol id="marchio-alba" viewBox="0 0 72 56">
+      <path d="M20 34a16 16 0 0 1 32 0Z" fill="url(#oro-alba)"/>
+      <g stroke="#d3a55c" stroke-width="2.6" stroke-linecap="round">
+        <path d="M36 7v6M17 14l4 4M55 14l-4 4M10 28h6M56 28h6"/>
+      </g>
+      <path d="M10 41q6-5 13 0t13 0 13 0 13 0" stroke="#5fb0bd" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <path d="M17 49q6-5 13 0t13 0 12 0" stroke="#5fb0bd" stroke-width="3" fill="none" stroke-linecap="round" opacity=".55"/>
+    </symbol>
+  </defs>
+</svg>
+
 <!-- ================= HEADER ================= -->
 <header id="header">
   <div class="container">
     <a class="logo" href="#home">
-      <span class="stelle">★★★★</span>
-      <span class="nome">All'Alba</span>
-      <span class="sotto">Hotel Terme · Abano</span>
+      <svg class="marchio" aria-hidden="true"><use href="#marchio-alba"/></svg>
+      <img class="marchio-img" src="img/logo.png" alt="Hotel Terme All'Alba">
+      <span class="logo-testo">
+        <span class="stelle">★★★★</span>
+        <span class="nome">All'Alba</span>
+        <span class="sotto">Hotel Terme · Abano</span>
+      </span>
     </a>
     <nav class="desktop">
       <a href="#hotel">L'Hotel</a>
@@ -298,6 +329,7 @@ footer .logo{color:#fff}
 <section class="hero" id="home" style="padding-top:0">
   <div class="hero-sole"></div>
   <div class="hero-inner">
+    <svg class="hero-marchio" aria-hidden="true"><use href="#marchio-alba"/></svg>
     <p class="pre">Abano Terme · Colli Euganei</p>
     <h1>Il benessere nasce <em>All'Alba</em></h1>
     <p class="sub">SPA Hotel 4 stelle nel cuore di Abano Terme, a pochi passi dall'isola pedonale
@@ -351,6 +383,12 @@ footer .logo{color:#fff}
           al Parco Termale Urbano nel centro di Abano Terme, a pochi metri dall'elegante isola pedonale.
           Un grande parco verde, ambienti luminosi e uno staff attento a ogni richiesta rendono
           il soggiorno un'esperienza di autentico relax.</p>
+        <blockquote class="benvenuto">
+          «La Famiglia Scappini, la direzione e tutto il personale sono lieti di darvi il benvenuto
+          all'Hotel All'Alba. Lasciatevi sedurre dalle nuove atmosfere termali, circondati da calde
+          emozioni di benessere e relax!»
+          <cite>— Famiglia Scappini</cite>
+        </blockquote>
         <div class="punti">
           <div class="punto">
             <div class="ico">✦</div>
@@ -671,9 +709,13 @@ footer .logo{color:#fff}
   <div class="container">
     <div class="footer-grid">
       <a class="logo" href="#home">
-        <span class="stelle">★★★★</span>
-        <span class="nome">All'Alba</span>
-        <span class="sotto">Hotel Terme · Abano</span>
+        <svg class="marchio" aria-hidden="true"><use href="#marchio-alba"/></svg>
+        <img class="marchio-img" src="img/logo.png" alt="Hotel Terme All'Alba">
+        <span class="logo-testo">
+          <span class="stelle">★★★★</span>
+          <span class="nome">All'Alba</span>
+          <span class="sotto">Hotel Terme · Abano</span>
+        </span>
       </a>
       <nav class="footer-nav">
         <a href="#hotel">L'Hotel</a>
@@ -694,6 +736,11 @@ footer .logo{color:#fff}
 <button id="torna-su" aria-label="Torna su" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
 <script>
+// Logo ufficiale: se img/logo.png esiste, sostituisce il marchio SVG in header e footer
+(()=>{const probe=new Image();
+  probe.onload=()=>document.body.classList.add('logo-ufficiale');
+  probe.src='img/logo.png';})();
+
 // Header solido allo scroll + pulsante torna su
 const header=document.getElementById('header'),tornaSu=document.getElementById('torna-su');
 addEventListener('scroll',()=>{
